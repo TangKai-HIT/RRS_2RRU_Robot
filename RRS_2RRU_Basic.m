@@ -7,7 +7,6 @@ classdef RRS_2RRU_Basic < handle
         r;
         L1;
         L2;
-        L3;
         toolHight; %cutter BTC hight (z) in P frame
         thetas;
     end
@@ -28,7 +27,7 @@ classdef RRS_2RRU_Basic < handle
     end
 
     methods
-        function obj = RRS_2RRU_Basic(R, r, L1, L2, L3, toolHight)
+        function obj = RRS_2RRU_Basic(R, r, L1, L2, toolHight)
             %RRS_2RRU_ROBOT Construct an instance of this class
             %   Detailed explanation goes here
             if nargin>0
@@ -36,7 +35,6 @@ classdef RRS_2RRU_Basic < handle
                 obj.r = r;
                 obj.L1 = L1;
                 obj.L2 = L2;
-                obj.L3 = L3;
                 obj.toolHight = toolHight;
                 obj.A1 = [obj.R; 0; 0];
                 obj.A2 = [-obj.R; 0; 0];
@@ -93,9 +91,9 @@ classdef RRS_2RRU_Basic < handle
             obj.thetas = thetas;
 
             %update Bi
-            obj.B1 = obj.A1 + eul2rotm([0, -thetas(1), 0], "ZYX") * [obj.L1, 0, 0];
-            obj.B2 = obj.A2 + eul2rotm([0, -thetas(2), 0], "ZYX") * [obj.L1, 0, 0];
-            obj.B3 = obj.A3 + eul2rotm([0, 0, thetas(3)], "ZYX") * [0, 0, obj.L1];
+            obj.B1 = obj.A1 + eul2rotm([0, -thetas(1), 0], "ZYX") * [obj.L1; 0; 0];
+            obj.B2 = obj.A2 + eul2rotm([0, -thetas(2), 0], "ZYX") * [obj.L1; 0; 0];
+            obj.B3 = obj.A3 + eul2rotm([0, 0, thetas(3)], "ZYX") * [0; 0; obj.L1];
         end
         
         function J_a = getActuationJacob(obj)
@@ -123,7 +121,7 @@ classdef RRS_2RRU_Basic < handle
             J_a = [J_1a; J_2a; J_3a];
         end
         
-        function R_p = calEndEffectorSO3(alpha, beta)
+        function R_p = calEndEffectorSO3(obj, alpha, beta)
             %CALENDEFFECTORSE3
             R_p = [cos(beta),  sin(alpha)*sin(beta),  cos(alpha)*sin(beta);
                     0   ,       cos(alpha),         -sin(alpha);
@@ -137,7 +135,7 @@ classdef RRS_2RRU_Basic < handle
             P_0 = [-sin(alpha)*sin(beta)*obj.r; 0; zp];
 
             Tf_P = [R_p, P_0;
-                    0,  1];
+                    zeros(1,3),  1];
 
             btc_p = [0, 0, obj.toolHight];
             Tf_BTC = Tf_P * trvec2tform(btc_p);
