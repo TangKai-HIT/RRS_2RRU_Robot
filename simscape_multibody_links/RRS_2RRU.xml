@@ -1,34 +1,59 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no" ?>
 <SimscapeMultibodyImportXML version="2.0" xmlns="urn:mathworks:SimscapeMultibody:import" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-<Created by="" on="05/04/23||15:59:53" using="Simscape Multibody Link Version 7.4" from="SolidWorks 26.3.0"/>
+<Created by="" on="05/07/23||16:25:47" using="Simscape Multibody Link Version 7.4" from="SolidWorks 26.3.0"/>
 <ModelUnits mass="kilogram" length="millimeter"/>
 <DataUnits mass="kilogram" length="meter"/>
-<RootAssembly name="并联模块2RRU-RRS（外凸）_V2" uid="并联模块2RRU-RRS（外凸）_V2" version="3031">
+<RootAssembly name="并联模块2RRU-RRS（外凸）_V2" uid="并联模块2RRU-RRS（外凸）_V2" version="3827">
 <AssemblyFile name="并联模块2RRU-RRS（外凸）_V2.SLDASM" type="SolidWorks Assembly"/>
 <InstanceTree>
-<Instance name="并联模块RRS分支_V2-1" uid="并联模块RRS分支_V2-1" entityUid="并联模块RRS分支_V2">
+<Instance name="并联模块RRU分支_V2-2" uid="并联模块RRU分支_V2-2" entityUid="并联模块RRU分支_V2">
 <Transform>
-<Rotation>1 0 0 0 -0.3549701436545572 -0.93487763750870811 0 0.93487763750870811 -0.3549701436545572</Rotation>
-<Translation>0 0.14758185143082669 0.052299233917466867</Translation>
+<Rotation>-3.6131608402381575e-15 0.42261826175409395 -0.90630778703040404 1 1.6333643602767681e-15 -3.2250315790223351e-15 1.1737359874828907e-16 -0.90630778703040404 -0.42261826175409395</Rotation>
+<Translation>0.15395083467922541 -0.0087001607134560201 0.057819030690184882</Translation>
 </Transform>
-<Instance name="并联模块RRS-RR杆_V2-1" uid="并联模块RRS-RR杆_V2-1" entityUid="并联模块RRS-RR杆_V2*:*默认">
+<Instance name="并联模块RRU-RU杆_V2-1" uid="并联模块RRU-RU杆_V2-1" entityUid="并联模块RRU-RU杆_V2*:*默认">
+<Transform>
+<Rotation>1 0 1.0332127669527349e-16 -1.2114429490595942e-16 -0.40749842391321101 0.91320591024601316 0 -0.91320591024601316 -0.40749842391321101</Rotation>
+<Translation>0 -0.087667767383617839 -0.039284433229866578</Translation>
+</Transform>
+</Instance>
+<Instance name="虎克铰装配-1" uid="虎克铰装配-1" entityUid="虎克铰装配">
+<Transform>
+<Rotation>2.5163521182079869e-15 -1.3888488567432965e-15 -1 -0.42261826175409406 0.90630778703040404 -2.3221808920330153e-15 0.90630778703040404 0.42261826175409406 1.6936366299663376e-15</Rotation>
+<Translation>0.019999999999999206 -0.18607776757061906 -0.0019675866765564987</Translation>
+</Transform>
+<VisualProperties>
+<Ambient r="0.15294117647058825" g="0.84313725490196079" b="0" a="1"/>
+<Diffuse r="0.15294117647058825" g="0.84313725490196079" b="0" a="1"/>
+<Specular r="0.076470588235294124" g="0.42156862745098039" b="0" a="1"/>
+<Emissive r="0" g="0" b="0" a="1"/>
+<Shininess>0.40000000596046448</Shininess>
+</VisualProperties>
+<Instance name="虎克铰零件1-1" uid="虎克铰零件1-1" grounded="true" entityUid="虎克铰零件1*:*默认">
+<Transform>
+<Rotation>1 0 0 0 1 0 0 0 1</Rotation>
+<Translation>-0.0029057888762769601 -0.009502249127674639 0.019999999999999997</Translation>
+</Transform>
+</Instance>
+<Instance name="虎克铰零件1-2" uid="虎克铰零件1-2" entityUid="虎克铰零件1*:*默认">
+<Transform>
+<Rotation>2.2243338947645081e-15 0.75525648920689448 -0.65542935203641584 -1.9039881833506752e-15 -0.65542935203641584 -0.75525648920689448 -0.99999999999999989 2.9278723494822662e-15 0</Rotation>
+<Translation>-0.018010918657210578 0.023606337911871222 0.019999999999999532</Translation>
+</Transform>
+</Instance>
+<Instance name="虎克铰零件2-1" uid="虎克铰零件2-1" entityUid="虎克铰零件2*:*默认">
+<Transform>
+<Rotation>1 -2.3844383559632138e-15 -1.0992022719116009e-15 -2.3920691000430959e-15 -1 8.6736173798840335e-16 -1.0916616176693136e-15 -8.326672684688678e-16 -1.0000000000000004</Rotation>
+<Translation>-0.0029057888791290121 0.010497750872332401 0.020000000000006408</Translation>
+</Transform>
+</Instance>
+</Instance>
+<Instance name="并联模块RRU-RR杆_V2-1" uid="并联模块RRU-RR杆_V2-1" entityUid="并联模块RRU-RR杆_V2*:*默认">
 <Transform>
 <Rotation>1 0 0 0 1 0 0 0 1</Rotation>
 <Translation>0 0 0</Translation>
 </Transform>
 </Instance>
-<Instance name="并联模块RRS-RS杆_V2-1" uid="并联模块RRS-RS杆_V2-1" entityUid="并联模块RRS-RS杆_V2*:*默认">
-<Transform>
-<Rotation>1 0 0 0 -0.50791583373791904 -0.86140670176073886 0 0.86140670176073886 -0.50791583373791904</Rotation>
-<Translation>2.8582842632255992e-12 0.082049145387858485 -0.030025206163000639</Translation>
-</Transform>
-</Instance>
-</Instance>
-<Instance name="并联模块动平台2_V2-2" uid="并联模块动平台2_V2-2" entityUid="并联模块动平台2_V2*:*默认">
-<Transform>
-<Rotation>-0.99999999999999989 -4.2633583760078734e-15 3.170334870515598e-16 -4.2202140930277003e-15 0.99628451817179398 0.086122928719339159 -6.8302846441341048e-16 0.086122928719339173 -0.99628451817179386</Rotation>
-<Translation>-2.8590406585838684e-12 -0.0021405581787193088 0.2217834902868234</Translation>
-</Transform>
 </Instance>
 <Instance name="并联模块3R基座_V2-1" uid="并联模块3R基座_V2-1" entityUid="并联模块3R基座_V2*:*默认">
 <Transform>
@@ -38,14 +63,45 @@
 </Instance>
 <Instance name="并联模块RRU分支_V2-1" uid="并联模块RRU分支_V2-1" entityUid="并联模块RRU分支_V2">
 <Transform>
-<Rotation>3.5782175125186258e-15 -0.32379264911373656 0.94612806764195978 -1 -1.1586005278240826e-15 3.3854520206053338e-15 0 -0.94612806764195978 -0.32379264911373656</Rotation>
-<Translation>-0.15719999906965193 -0.0087001607134565544 0.049755283862645883</Translation>
+<Rotation>3.5782175125188175e-15 -0.42261826172730671 0.90630778704289505 -1 -1.5122200655491043e-15 3.2429663951769551e-15 0 -0.90630778704289505 -0.42261826172730671</Rotation>
+<Translation>-0.15395083468024459 -0.0087001607134570801 0.057819030687999068</Translation>
 </Transform>
 <Instance name="并联模块RRU-RU杆_V2-1" uid="并联模块RRU-RU杆_V2-1" entityUid="并联模块RRU-RU杆_V2*:*默认">
 <Transform>
-<Rotation>1 -9.3220557107325199e-16 0 -4.7708454496568171e-16 -0.54679665327236204 0.83726544176273299 -8.0182138790375975e-16 -0.83726544176273299 -0.54679665327236204</Rotation>
-<Translation>0 -0.080377482409201714 -0.025911803211396661</Translation>
+<Rotation>1 -9.0407611811054126e-16 -1.1284083135202202e-16 -2.6536267911987711e-16 -0.40749842391320956 0.91320591024601372 -8.7159011529982415e-16 -0.91320591024601372 -0.40749842391320956</Rotation>
+<Translation>0 -0.087667767383618006 -0.039284433229867022</Translation>
 </Transform>
+</Instance>
+<Instance name="虎克铰装配-1" uid="虎克铰装配-1" entityUid="虎克铰装配">
+<Transform>
+<Rotation>3.5700609135599779e-15 1.2351231148954153e-15 -1 -0.42261826172730954 0.90630778704289372 -3.8937124056293906e-16 0.90630778704289372 0.42261826172730954 3.7575595900131956e-15</Rotation>
+<Translation>0.020000000000000441 -0.1860777675755233 -0.0019675866714307377</Translation>
+</Transform>
+<VisualProperties>
+<Ambient r="0.15294117647058825" g="0.84313725490196079" b="0" a="1"/>
+<Diffuse r="0.15294117647058825" g="0.84313725490196079" b="0" a="1"/>
+<Specular r="0.076470588235294124" g="0.42156862745098039" b="0" a="1"/>
+<Emissive r="0" g="0" b="0" a="1"/>
+<Shininess>0.40000000596046448</Shininess>
+</VisualProperties>
+<Instance name="虎克铰零件1-1" uid="虎克铰零件1-1" grounded="true" entityUid="虎克铰零件1*:*默认">
+<Transform>
+<Rotation>1 0 0 0 1 0 0 0 1</Rotation>
+<Translation>-0.0029057888762769601 -0.0095022491276746668 0.019999999999999997</Translation>
+</Transform>
+</Instance>
+<Instance name="虎克铰零件1-2" uid="虎克铰零件1-2" entityUid="虎克铰零件1*:*默认">
+<Transform>
+<Rotation>3.7098342239447106e-15 0.75525648918752375 -0.65542935205873687 1.704617509888572e-15 -0.65542935205873698 -0.75525648918752364 -0.99999999999999989 1.6846200214299594e-15 -3.7189576775714306e-15</Rotation>
+<Translation>-0.018010918663230874 0.023606337914682501 0.019999999999999928</Translation>
+</Transform>
+</Instance>
+<Instance name="虎克铰零件2-1" uid="虎克铰零件2-1" entityUid="虎克铰零件2*:*默认">
+<Transform>
+<Rotation>1 -2.6725689056929591e-16 0 -2.6725689056929586e-16 -1 5.2041704279304144e-16 0 -5.2041704279304144e-16 -1</Rotation>
+<Translation>-0.0029057888791363673 0.010497750872325906 0.019999999999999331</Translation>
+</Transform>
+</Instance>
 </Instance>
 <Instance name="并联模块RRU-RR杆_V2-1" uid="并联模块RRU-RR杆_V2-1" entityUid="并联模块RRU-RR杆_V2*:*默认">
 <Transform>
@@ -53,81 +109,25 @@
 <Translation>0 0 0</Translation>
 </Transform>
 </Instance>
-<Instance name="虎克铰装配-1" uid="虎克铰装配-1" entityUid="虎克铰装配">
+</Instance>
+<Instance name="并联模块动平台_withMotor-2" uid="并联模块动平台_withMotor-2" entityUid="并联模块动平台_withMotor*:*默认">
 <Transform>
-<Rotation>-1.5430539004713805e-15 -0.086122928719339159 -0.99628451817179398 -0.32379264911373729 0.94261274599948019 -0.081483320128894102 0.94612806764195956 0.32258960340984838 -0.027885971239469863</Rotation>
-<Translation>0.020829787412063067 -0.16996148527264704 0.02650117805412075</Translation>
-</Transform>
-<VisualProperties>
-<Ambient r="0.15294117647058825" g="0.84313725490196079" b="0" a="1"/>
-<Diffuse r="0.15294117647058825" g="0.84313725490196079" b="0" a="1"/>
-<Specular r="0.076470588235294124" g="0.42156862745098039" b="0" a="1"/>
-<Emissive r="0" g="0" b="0" a="1"/>
-<Shininess>0.40000000596046448</Shininess>
-</VisualProperties>
-<Instance name="虎克铰零件1-2" uid="虎克铰零件1-2" entityUid="虎克铰零件1*:*默认">
-<Transform>
-<Rotation>-1.9923444744907551e-15 0.7884400563534093 -0.61511159762878198 -0.08612292871933977 -0.61282616166547366 -0.7855106216513984 -0.99628451817179398 0.052975212277021302 0.067902766772798218</Rotation>
-<Translation>-0.018674590006603556 0.022754274106709188 0.018940495752894394</Translation>
+<Rotation>-1.0000000000000002 -8.9292501392839341e-16 1.316551210037293e-15 -8.9298885426590138e-16 1.0000000000000002 0 -1.3184359555996823e-15 0 -1</Rotation>
+<Translation>-2.8591327532886622e-12 0.0002930223888322459 0.24466562493860447</Translation>
 </Transform>
 </Instance>
-<Instance name="虎克铰零件2-1" uid="虎克铰零件2-1" entityUid="虎克铰零件2*:*默认">
+<Instance name="并联模块RRS分支_V2-1" uid="并联模块RRS分支_V2-1" entityUid="并联模块RRS分支_V2">
 <Transform>
-<Rotation>1 2.4660830534611133e-16 -6.1514652152165003e-15 -1.1159291255277038e-16 -0.99628451817179353 -0.086122928719344211 -6.1718711823360913e-15 0.086122928719344335 -0.99628451817179342</Rotation>
-<Translation>-0.0029057888764808804 0.01049775087199542 0.019999999997917219</Translation>
+<Rotation>1 0 0 0 -0.42261826175409817 -0.90630778703040227 0 0.90630778703040227 -0.42261826175409817</Rotation>
+<Translation>0 0.14525067396576916 0.057819030690185347</Translation>
+</Transform>
+<Instance name="并联模块RRS-RS杆_V2-1" uid="并联模块RRS-RS杆_V2-1" entityUid="并联模块RRS-RS杆_V2*:*默认">
+<Transform>
+<Rotation>1 0 0 0 -0.40749842391321034 -0.9132059102460135 0 0.9132059102460135 -0.40749842391321034</Rotation>
+<Translation>0 0.086983029438800569 -0.039589982756184638</Translation>
 </Transform>
 </Instance>
-<Instance name="虎克铰零件1-1" uid="虎克铰零件1-1" grounded="true" entityUid="虎克铰零件1*:*默认">
-<Transform>
-<Rotation>1 0 0 0 1 0 0 0 1</Rotation>
-<Translation>-0.0029057888762769601 -0.0095022491276746668 0.020000000000000004</Translation>
-</Transform>
-</Instance>
-</Instance>
-</Instance>
-<Instance name="并联模块RRU分支_V2-2" uid="并联模块RRU分支_V2-2" entityUid="并联模块RRU分支_V2">
-<Transform>
-<Rotation>-3.6131608402381575e-15 0.32379264914557826 -0.94612806763106272 1 1.2809653764243994e-15 -3.3805081753362982e-15 1.1737359874828907e-16 -0.94612806763106272 -0.32379264914557826</Rotation>
-<Translation>0.15719999906876292 -0.0087001607134560045 0.04975528386524411</Translation>
-</Transform>
-<Instance name="虎克铰装配-1" uid="虎克铰装配-1" entityUid="虎克铰装配">
-<Transform>
-<Rotation>2.8276671066562087e-16 0.08612292871933902 -0.99628451817179398 -0.32379264914557765 0.94261274598862388 0.08148332012795588 0.94612806763106272 0.32258960344157056 0.027885971242210799</Rotation>
-<Translation>0.019021593314808377 -0.17322081807311102 0.025385739198840934</Translation>
-</Transform>
-<VisualProperties>
-<Ambient r="0.15294117647058825" g="0.84313725490196079" b="0" a="1"/>
-<Diffuse r="0.15294117647058825" g="0.84313725490196079" b="0" a="1"/>
-<Specular r="0.076470588235294124" g="0.42156862745098039" b="0" a="1"/>
-<Emissive r="0" g="0" b="0" a="1"/>
-<Shininess>0.40000000596046448</Shininess>
-</VisualProperties>
-<Instance name="虎克铰零件1-1" uid="虎克铰零件1-1" grounded="true" entityUid="虎克铰零件1*:*默认">
-<Transform>
-<Rotation>1 0 0 0 1 0 0 0 1</Rotation>
-<Translation>-0.0029057888762769601 -0.009502249127674639 0.01999999999999999</Translation>
-</Transform>
-</Instance>
-<Instance name="虎克铰零件2-1" uid="虎克铰零件2-1" entityUid="虎克铰零件2*:*默认">
-<Transform>
-<Rotation>1 -3.1621252250344885e-16 -4.2683598116974273e-15 0 -0.99628451817179375 0.086122928719343558 -4.2761824819501773e-15 -0.086122928719343544 -0.99628451817179342</Rotation>
-<Translation>-0.0029057888771364254 0.010497750871653527 0.020000000001986235</Translation>
-</Transform>
-</Instance>
-<Instance name="虎克铰零件1-2" uid="虎克铰零件1-2" entityUid="虎克铰零件1*:*默认">
-<Transform>
-<Rotation>3.1853242697051659e-16 0.78844005637411041 -0.61511159760224787 0.086122928719339034 -0.61282616163903791 -0.78551062167202268 -0.99628451817179398 -0.052975212274736901 -0.067902766774579348</Rotation>
-<Translation>-0.01867459000051587 0.022754274103499145 0.021059504246856958</Translation>
-</Transform>
-</Instance>
-</Instance>
-<Instance name="并联模块RRU-RU杆_V2-1" uid="并联模块RRU-RU杆_V2-1" entityUid="并联模块RRU-RU杆_V2*:*默认">
-<Transform>
-<Rotation>1 0 0 -1.2236484878695108e-16 -0.54679665327236282 0.83726544176273232 0 -0.83726544176273232 -0.54679665327236282</Rotation>
-<Translation>-2.9774793741665917e-14 -0.080377482409195733 -0.025911803211397133</Translation>
-</Transform>
-</Instance>
-<Instance name="并联模块RRU-RR杆_V2-1" uid="并联模块RRU-RR杆_V2-1" entityUid="并联模块RRU-RR杆_V2*:*默认">
+<Instance name="并联模块RRS-RR杆_V2-1" uid="并联模块RRS-RR杆_V2-1" entityUid="并联模块RRS-RR杆_V2*:*默认">
 <Transform>
 <Rotation>1 0 0 0 1 0 0 0 1</Rotation>
 <Translation>0 0 0</Translation>
@@ -197,7 +197,7 @@
 <Uid>并联模块RRU分支_V2-1</Uid>
 <Uid>并联模块RRU-RR杆_V2-1</Uid>
 </InstancePath>
-<Position>0.016 0 0.081595718074465265</Position>
+<Position>0.016 0 0.081595718074465251</Position>
 <Axis>-1 0 0</Axis>
 </ConstraintGeometry>
 </Concentric>
@@ -214,7 +214,7 @@
 <Uid>并联模块RRU分支_V2-1</Uid>
 <Uid>并联模块RRU-RR杆_V2-1</Uid>
 </InstancePath>
-<Position>0.016 0 0.081595718074465265</Position>
+<Position>0.016 0 0.081595718074465251</Position>
 <Axis>1 0 0</Axis>
 </ConstraintGeometry>
 </Coincident>
@@ -231,7 +231,7 @@
 <Uid>并联模块RRU分支_V2-2</Uid>
 <Uid>并联模块RRU-RR杆_V2-1</Uid>
 </InstancePath>
-<Position>0.016 0 0.081595718074465279</Position>
+<Position>0.016 0 0.081595718074465293</Position>
 <Axis>-1 0 0</Axis>
 </ConstraintGeometry>
 </Concentric>
@@ -248,7 +248,7 @@
 <Uid>并联模块RRU分支_V2-2</Uid>
 <Uid>并联模块RRU-RR杆_V2-1</Uid>
 </InstancePath>
-<Position>-0.016 0 0.081595718074465279</Position>
+<Position>-0.016 0 0.081595718074465293</Position>
 <Axis>-1 0 0</Axis>
 </ConstraintGeometry>
 </Coincident>
@@ -265,7 +265,7 @@
 <Uid>并联模块RRS分支_V2-1</Uid>
 <Uid>并联模块RRS-RR杆_V2-1</Uid>
 </InstancePath>
-<Position>0.016 0 0.081595718074465293</Position>
+<Position>0.016 0 0.081595718074465279</Position>
 <Axis>-1 0 0</Axis>
 </ConstraintGeometry>
 </Concentric>
@@ -282,32 +282,32 @@
 <Uid>并联模块RRS分支_V2-1</Uid>
 <Uid>并联模块RRS-RR杆_V2-1</Uid>
 </InstancePath>
-<Position>-0.016 0 0.081595718074465293</Position>
+<Position>-0.016 0 0.081595718074465279</Position>
 <Axis>-1 0 0</Axis>
 </ConstraintGeometry>
 </Coincident>
 <Concentric name="同心7">
 <ConstraintGeometry geomType="sphere">
 <InstancePath>
-<Uid>并联模块动平台2_V2-2</Uid>
+<Uid>并联模块动平台_withMotor-2</Uid>
 </InstancePath>
-<Position>-2.859331081213716e-12 0.071006816894851874 0.027869077315980012</Position>
+<Position>-2.8593309702066643e-12 0.071006816894851901 0.027869077315980012</Position>
 </ConstraintGeometry>
 <ConstraintGeometry geomType="sphere">
 <InstancePath>
 <Uid>并联模块RRS分支_V2-1</Uid>
 <Uid>并联模块RRS-RS杆_V2-1</Uid>
 </InstancePath>
-<Position>0 0 -0.096749817688578418</Position>
+<Position>0 0 -0.096749817688578363</Position>
 </ConstraintGeometry>
 </Concentric>
 <Concentric name="同心8">
-<ConstraintGeometry geomType="cylinder">
+<ConstraintGeometry geomType="sphere">
 <InstancePath>
-<Uid>并联模块动平台2_V2-2</Uid>
+<Uid>并联模块RRS分支_V2-1</Uid>
+<Uid>并联模块RRS-RS杆_V2-1</Uid>
 </InstancePath>
-<Position>-0.15999999997679046 -0.0033930259560727809 -0.10581244921241556</Position>
-<Axis>0.99999999999999989 4.2339557746746413e-15 -4.031101020645287e-16</Axis>
+<Position>0 0 -0.096749817688578363</Position>
 </ConstraintGeometry>
 <ConstraintGeometry geomType="cylinder">
 <InstancePath>
@@ -317,54 +317,6 @@
 <Axis>-1 -3.1606855754973875e-15 2.7755575615628909e-16</Axis>
 </ConstraintGeometry>
 </Concentric>
-<Coincident name="重合10">
-<ConstraintGeometry geomType="plane">
-<InstancePath>
-<Uid>并联模块2RRU-RRS（外凸）_V2</Uid>
-</InstancePath>
-<Position>-0.06399999994931091 0.0053661445845281514 0.31491057793391664</Position>
-<Axis>1 3.1606855754973868e-15 0</Axis>
-</ConstraintGeometry>
-<ConstraintGeometry geomType="plane">
-<InstancePath>
-<Uid>并联模块动平台2_V2-2</Uid>
-</InstancePath>
-<Position>0.064000000023209547 -0.018546730212547703 -0.093070186960081347</Position>
-<Axis>0.99999999999999989 3.7401620196961119e-15 -4.4579566385576146e-16</Axis>
-</ConstraintGeometry>
-</Coincident>
-<Concentric name="同心9">
-<ConstraintGeometry geomType="cylinder">
-<InstancePath>
-<Uid>并联模块动平台2_V2-2</Uid>
-</InstancePath>
-<Position>0.16000000002320944 -0.0033930259560714243 -0.10581244921241573</Position>
-<Axis>-0.99999999999999989 -4.2339557746746413e-15 4.031101020645287e-16</Axis>
-</ConstraintGeometry>
-<ConstraintGeometry geomType="cylinder">
-<InstancePath>
-<Uid>并联模块2RRU-RRS（外凸）_V2</Uid>
-</InstancePath>
-<Position>0.04000000006795517 -0.01463385544336411 0.3269105778616056</Position>
-<Axis>1 3.1606855754973872e-15 -2.7755575615628909e-16</Axis>
-</ConstraintGeometry>
-</Concentric>
-<Coincident name="重合11">
-<ConstraintGeometry geomType="plane">
-<InstancePath>
-<Uid>并联模块2RRU-RRS（外凸）_V2</Uid>
-</InstancePath>
-<Position>0.064000000067955226 -0.034633855443364031 0.31491057786160559</Position>
-<Axis>-1 -3.1606855754973872e-15 5.6667633548575692e-16</Axis>
-</ConstraintGeometry>
-<ConstraintGeometry geomType="plane">
-<InstancePath>
-<Uid>并联模块动平台2_V2-2</Uid>
-</InstancePath>
-<Position>-0.063999999976790373 -0.018546730212548244 -0.093070186960081291</Position>
-<Axis>-0.99999999999999989 -4.7277495296531714e-15 3.6042454027329585e-16</Axis>
-</ConstraintGeometry>
-</Coincident>
 <Concentric name="同心11">
 <ConstraintGeometry geomType="cylinder">
 <InstancePath>
@@ -372,14 +324,14 @@
 <Uid>虎克铰装配-1</Uid>
 <Uid>虎克铰零件1-1</Uid>
 </InstancePath>
-<Position>0 0.026000999999999996 0.0044999999999999971</Position>
-<Axis>0 -1 0</Axis>
+<Position>0 0.026000999999999996 0.0045000000000000005</Position>
+<Axis>0 -0.99999999999999978 0</Axis>
 </ConstraintGeometry>
 <ConstraintGeometry geomType="cylinder">
 <InstancePath>
-<Uid>并联模块动平台2_V2-2</Uid>
+<Uid>并联模块动平台_withMotor-2</Uid>
 </InstancePath>
-<Position>0.080000000000000002 -0.0044931831022887447 0.0018690773159800445</Position>
+<Position>0.080000000000000029 -0.0044931831022887456 0.039182785814964732</Position>
 <Axis>0 0 -1</Axis>
 </ConstraintGeometry>
 </Concentric>
@@ -390,14 +342,14 @@
 <Uid>虎克铰装配-1</Uid>
 <Uid>虎克铰零件1-1</Uid>
 </InstancePath>
-<Position>0 0.026000999999999996 -0.0045000000000000005</Position>
-<Axis>0 -1 0</Axis>
+<Position>0 0.026001000000000024 -0.0044999999999999988</Position>
+<Axis>0 -0.99999999999999978 0</Axis>
 </ConstraintGeometry>
 <ConstraintGeometry geomType="cylinder">
 <InstancePath>
-<Uid>并联模块动平台2_V2-2</Uid>
+<Uid>并联模块动平台_withMotor-2</Uid>
 </InstancePath>
-<Position>0.080000000000000002 -0.013493183102288744 0.0018690773159800445</Position>
+<Position>0.080000000000000029 -0.013493183102288749 0.039182785814964732</Position>
 <Axis>0 0 -1</Axis>
 </ConstraintGeometry>
 </Concentric>
@@ -409,13 +361,13 @@
 <Uid>虎克铰零件1-1</Uid>
 </InstancePath>
 <Position>0 0 0</Position>
-<Axis>0 -1 0</Axis>
+<Axis>0 -0.99999999999999978 0</Axis>
 </ConstraintGeometry>
 <ConstraintGeometry geomType="plane">
 <InstancePath>
-<Uid>并联模块动平台2_V2-2</Uid>
+<Uid>并联模块动平台_withMotor-2</Uid>
 </InstancePath>
-<Position>-2.8593310812137165e-12 -0.0089931831051480778 0.0078690773159800775</Position>
+<Position>-2.8593310027943485e-12 -0.0089931831051480796 0.0078690773159800498</Position>
 <Axis>0 0 1</Axis>
 </ConstraintGeometry>
 </Coincident>
@@ -426,14 +378,14 @@
 <Uid>虎克铰装配-1</Uid>
 <Uid>虎克铰零件1-1</Uid>
 </InstancePath>
-<Position>0 0.026000999999999996 -0.0044999999999999988</Position>
-<Axis>0 -1.0000000000000002 0</Axis>
+<Position>0 0.026000999999999996 -0.0045000000000000023</Position>
+<Axis>0 -1 0</Axis>
 </ConstraintGeometry>
 <ConstraintGeometry geomType="cylinder">
 <InstancePath>
-<Uid>并联模块动平台2_V2-2</Uid>
+<Uid>并联模块动平台_withMotor-2</Uid>
 </InstancePath>
-<Position>-0.079999999999999974 -0.004493183102288743 0.0018690773159800722</Position>
+<Position>-0.080000000000000057 -0.0044931831022887456 0.03918278581496476</Position>
 <Axis>0 0 -1</Axis>
 </ConstraintGeometry>
 </Concentric>
@@ -445,13 +397,13 @@
 <Uid>虎克铰零件1-1</Uid>
 </InstancePath>
 <Position>0 0.026000999999999996 0.0044999999999999988</Position>
-<Axis>0 -1.0000000000000002 0</Axis>
+<Axis>0 -1 0</Axis>
 </ConstraintGeometry>
 <ConstraintGeometry geomType="cylinder">
 <InstancePath>
-<Uid>并联模块动平台2_V2-2</Uid>
+<Uid>并联模块动平台_withMotor-2</Uid>
 </InstancePath>
-<Position>-0.079999999999999974 -0.013493183102288742 0.0018690773159800445</Position>
+<Position>-0.080000000000000057 -0.013493183102288749 0.03918278581496476</Position>
 <Axis>0 0 -1</Axis>
 </ConstraintGeometry>
 </Concentric>
@@ -463,106 +415,20 @@
 <Uid>虎克铰零件1-1</Uid>
 </InstancePath>
 <Position>0 0 0</Position>
-<Axis>0 -1.0000000000000002 0</Axis>
+<Axis>0 -1 0</Axis>
 </ConstraintGeometry>
 <ConstraintGeometry geomType="plane">
 <InstancePath>
-<Uid>并联模块动平台2_V2-2</Uid>
+<Uid>并联模块动平台_withMotor-2</Uid>
 </InstancePath>
-<Position>-2.8593310812137165e-12 -0.0089931831051480778 0.0078690773159800775</Position>
+<Position>-2.8593310027943485e-12 -0.0089931831051480796 0.0078690773159800498</Position>
 <Axis>0 0 1</Axis>
 </ConstraintGeometry>
 </Coincident>
 </Constraints>
 </RootAssembly>
 <Assemblies>
-<Assembly name="并联模块RRS分支_V2" uid="并联模块RRS分支_V2" version="169">
-<ModelUnits mass="kilogram" length="millimeter"/>
-<AssemblyFile name="并联模块RRS分支_V2.SLDASM" type="SolidWorks Assembly"/>
-<Constraints>
-<Coincident name="重合1">
-<ConstraintGeometry geomType="plane">
-<InstancePath>
-<Uid>并联模块RRS-RR杆_V2-1</Uid>
-</InstancePath>
-<Position>0 0 0</Position>
-<Axis>0 0 1</Axis>
-</ConstraintGeometry>
-<ConstraintGeometry geomType="plane">
-<InstancePath>
-<Uid>并联模块RRS分支_V2</Uid>
-</InstancePath>
-<Position>0 0 0</Position>
-<Axis>0 0 1</Axis>
-</ConstraintGeometry>
-</Coincident>
-<Coincident name="重合2">
-<ConstraintGeometry geomType="plane">
-<InstancePath>
-<Uid>并联模块RRS-RR杆_V2-1</Uid>
-</InstancePath>
-<Position>0 0 0</Position>
-<Axis>0 1 0</Axis>
-</ConstraintGeometry>
-<ConstraintGeometry geomType="plane">
-<InstancePath>
-<Uid>并联模块RRS分支_V2</Uid>
-</InstancePath>
-<Position>0 0 0</Position>
-<Axis>0 1 0</Axis>
-</ConstraintGeometry>
-</Coincident>
-<Coincident name="重合3">
-<ConstraintGeometry geomType="plane">
-<InstancePath>
-<Uid>并联模块RRS-RR杆_V2-1</Uid>
-</InstancePath>
-<Position>0 0 0</Position>
-<Axis>1 0 0</Axis>
-</ConstraintGeometry>
-<ConstraintGeometry geomType="plane">
-<InstancePath>
-<Uid>并联模块RRS分支_V2</Uid>
-</InstancePath>
-<Position>0 0 0</Position>
-<Axis>1 0 0</Axis>
-</ConstraintGeometry>
-</Coincident>
-<Concentric name="同心1">
-<ConstraintGeometry geomType="cylinder">
-<InstancePath>
-<Uid>并联模块RRS-RR杆_V2-1</Uid>
-</InstancePath>
-<Position>-0.031999999999999994 0 -0.078404281925534752</Position>
-<Axis>1 0 0</Axis>
-</ConstraintGeometry>
-<ConstraintGeometry geomType="cylinder">
-<InstancePath>
-<Uid>并联模块RRS-RS杆_V2-1</Uid>
-</InstancePath>
-<Position>0.016 0 0.095250182311421655</Position>
-<Axis>-1 0 0</Axis>
-</ConstraintGeometry>
-</Concentric>
-<Coincident name="重合4">
-<ConstraintGeometry geomType="plane">
-<InstancePath>
-<Uid>并联模块RRS-RS杆_V2-1</Uid>
-</InstancePath>
-<Position>0.016 0 0.095250182311421655</Position>
-<Axis>1 0 0</Axis>
-</ConstraintGeometry>
-<ConstraintGeometry geomType="plane">
-<InstancePath>
-<Uid>并联模块RRS-RR杆_V2-1</Uid>
-</InstancePath>
-<Position>0.016 0 0.0095957180744652495</Position>
-<Axis>1 0 0</Axis>
-</ConstraintGeometry>
-</Coincident>
-</Constraints>
-</Assembly>
-<Assembly name="并联模块RRU分支_V2" uid="并联模块RRU分支_V2" version="202">
+<Assembly name="并联模块RRU分支_V2" uid="并联模块RRU分支_V2" version="206">
 <ModelUnits mass="kilogram" length="millimeter"/>
 <AssemblyFile name="并联模块RRU分支_V2.SLDASM" type="SolidWorks Assembly"/>
 <Constraints>
@@ -651,7 +517,7 @@
 <InstancePath>
 <Uid>并联模块RRU-RU杆_V2-1</Uid>
 </InstancePath>
-<Position>-0.016001000000000001 0.013037872857785793 -0.076000000000000012</Position>
+<Position>-0.016001000000000001 0.013037872857785779 -0.076000000000000012</Position>
 <Axis>0 0 -1.0000000000000002</Axis>
 </ConstraintGeometry>
 <ConstraintGeometry geomType="plane">
@@ -668,7 +534,7 @@
 <InstancePath>
 <Uid>并联模块RRU-RU杆_V2-1</Uid>
 </InstancePath>
-<Position>0 0.004500000000000004 -0.068000000000000005</Position>
+<Position>0 0.004500000000000004 -0.068000000000000033</Position>
 <Axis>0 0 -1.0000000000000002</Axis>
 </ConstraintGeometry>
 <ConstraintGeometry geomType="cylinder">
@@ -676,7 +542,7 @@
 <Uid>虎克铰装配-1</Uid>
 <Uid>虎克铰零件1-2</Uid>
 </InstancePath>
-<Position>0 0.026001000000000024 0.0044999999999999762</Position>
+<Position>0 0.026000999999999996 0.004500000000000004</Position>
 <Axis>0 -1.0000000000000002 0</Axis>
 </ConstraintGeometry>
 </Concentric>
@@ -685,7 +551,7 @@
 <InstancePath>
 <Uid>并联模块RRU-RU杆_V2-1</Uid>
 </InstancePath>
-<Position>0 -0.004500000000000004 -0.068000000000000033</Position>
+<Position>0 -0.0044999999999999901 -0.068000000000000033</Position>
 <Axis>0 0 -1.0000000000000002</Axis>
 </ConstraintGeometry>
 <ConstraintGeometry geomType="cylinder">
@@ -693,13 +559,13 @@
 <Uid>虎克铰装配-1</Uid>
 <Uid>虎克铰零件1-2</Uid>
 </InstancePath>
-<Position>0 0.026000999999999996 -0.0045000000000000179</Position>
+<Position>0 0.026000999999999996 -0.0044999999999999901</Position>
 <Axis>0 -1.0000000000000002 0</Axis>
 </ConstraintGeometry>
 </Concentric>
 </Constraints>
 </Assembly>
-<Assembly name="虎克铰装配" uid="虎克铰装配" version="155">
+<Assembly name="虎克铰装配" uid="虎克铰装配" version="158">
 <ModelUnits mass="kilogram" length="millimeter"/>
 <AssemblyFile name="虎克铰装配.SLDASM" type="SolidWorks Assembly"/>
 <Constraints>
@@ -769,6 +635,92 @@
 </Coincident>
 </Constraints>
 </Assembly>
+<Assembly name="并联模块RRS分支_V2" uid="并联模块RRS分支_V2" version="172">
+<ModelUnits mass="kilogram" length="millimeter"/>
+<AssemblyFile name="并联模块RRS分支_V2.SLDASM" type="SolidWorks Assembly"/>
+<Constraints>
+<Coincident name="重合1">
+<ConstraintGeometry geomType="plane">
+<InstancePath>
+<Uid>并联模块RRS-RR杆_V2-1</Uid>
+</InstancePath>
+<Position>0 0 0</Position>
+<Axis>0 0 1</Axis>
+</ConstraintGeometry>
+<ConstraintGeometry geomType="plane">
+<InstancePath>
+<Uid>并联模块RRS分支_V2</Uid>
+</InstancePath>
+<Position>0 0 0</Position>
+<Axis>0 0 1</Axis>
+</ConstraintGeometry>
+</Coincident>
+<Coincident name="重合2">
+<ConstraintGeometry geomType="plane">
+<InstancePath>
+<Uid>并联模块RRS-RR杆_V2-1</Uid>
+</InstancePath>
+<Position>0 0 0</Position>
+<Axis>0 1 0</Axis>
+</ConstraintGeometry>
+<ConstraintGeometry geomType="plane">
+<InstancePath>
+<Uid>并联模块RRS分支_V2</Uid>
+</InstancePath>
+<Position>0 0 0</Position>
+<Axis>0 1 0</Axis>
+</ConstraintGeometry>
+</Coincident>
+<Coincident name="重合3">
+<ConstraintGeometry geomType="plane">
+<InstancePath>
+<Uid>并联模块RRS-RR杆_V2-1</Uid>
+</InstancePath>
+<Position>0 0 0</Position>
+<Axis>1 0 0</Axis>
+</ConstraintGeometry>
+<ConstraintGeometry geomType="plane">
+<InstancePath>
+<Uid>并联模块RRS分支_V2</Uid>
+</InstancePath>
+<Position>0 0 0</Position>
+<Axis>1 0 0</Axis>
+</ConstraintGeometry>
+</Coincident>
+<Concentric name="同心1">
+<ConstraintGeometry geomType="cylinder">
+<InstancePath>
+<Uid>并联模块RRS-RR杆_V2-1</Uid>
+</InstancePath>
+<Position>-0.031999999999999994 0 -0.078404281925534752</Position>
+<Axis>1 0 0</Axis>
+</ConstraintGeometry>
+<ConstraintGeometry geomType="cylinder">
+<InstancePath>
+<Uid>并联模块RRS-RS杆_V2-1</Uid>
+</InstancePath>
+<Position>0.016 0 0.095250182311421627</Position>
+<Axis>-1 0 0</Axis>
+</ConstraintGeometry>
+</Concentric>
+<Coincident name="重合4">
+<ConstraintGeometry geomType="plane">
+<InstancePath>
+<Uid>并联模块RRS-RS杆_V2-1</Uid>
+</InstancePath>
+<Position>0.016 0 0.095250182311421627</Position>
+<Axis>1 0 0</Axis>
+</ConstraintGeometry>
+<ConstraintGeometry geomType="plane">
+<InstancePath>
+<Uid>并联模块RRS-RR杆_V2-1</Uid>
+</InstancePath>
+<Position>0.016 0 0.0095957180744652495</Position>
+<Axis>1 0 0</Axis>
+</ConstraintGeometry>
+</Coincident>
+</Constraints>
+</Assembly>
 </Assemblies>
 <Parts>
 <Part name="并联模块3R基座_V2" uid="并联模块3R基座_V2*:*默认" version="442">
@@ -810,7 +762,7 @@
 <PartFile name="并联模块RRS-RS杆_V2.SLDPRT" type="SolidWorks Part"/>
 <MassProperties>
 <Mass>0.11039475666883708</Mass>
-<CenterOfMass>0 0 0.00124969614763061</CenterOfMass>
+<CenterOfMass>0 0 0.0012496961476306152</CenterOfMass>
 <Inertia>0.0005036256719311024 0.00050475677203504514 4.5978872873915509e-06 0 0 0</Inertia>
 </MassProperties>
 <GeometryFile name="并联模块RRS-RS杆_V2_默认_sldprt.STEP" type="STEP"/>
@@ -856,15 +808,15 @@
 <Shininess>0.3125</Shininess>
 </VisualProperties>
 </Part>
-<Part name="并联模块动平台2_V2" uid="并联模块动平台2_V2*:*默认" version="1393">
+<Part name="并联模块动平台_withMotor" uid="并联模块动平台_withMotor*:*默认" version="1487">
 <ModelUnits mass="kilogram" length="millimeter"/>
-<PartFile name="并联模块动平台2_V2.SLDPRT" type="SolidWorks Part"/>
+<PartFile name="并联模块动平台_withMotor.SLDPRT" type="SolidWorks Part"/>
 <MassProperties>
-<Mass>3.2152003880023847</Mass>
-<CenterOfMass>7.0784312475353294e-12 0.0019190728949776384 0.0091546205315671345</CenterOfMass>
-<Inertia>0.010955460273713507 0.011626168724486834 0.004219245233162177 3.2843071740995703e-05 5.7442920495021598e-13 -1.3552072075578901e-12</Inertia>
+<Mass>4.310515241857968</Mass>
+<CenterOfMass>-4.9599001859721869e-12 -0.0068627362821516843 0.069427098371444854</CenterOfMass>
+<Inertia>0.024889034035038716 0.02523189325054721 0.0057379031571567606 0.00067007630883983925 -1.8083276414954002e-12 1.3632236264346224e-12</Inertia>
 </MassProperties>
-<GeometryFile name="并联模块动平台2_V2_默认_sldprt.STEP" type="STEP"/>
+<GeometryFile name="并联模块动平台_withMotor_默认_sldprt.STEP" type="STEP"/>
 <VisualProperties>
 <Ambient r="0.89803921568627454" g="0.91764705882352937" b="0.92941176470588238" a="1"/>
 <Diffuse r="0.89803921568627454" g="0.91764705882352937" b="0.92941176470588238" a="1"/>
