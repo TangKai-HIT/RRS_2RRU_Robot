@@ -11,7 +11,7 @@ classdef RRS_2RRU_Basic < handle
         thetas;
     end
 
-    properties(Access=private)
+    properties(SetAccess=private, GetAccess=public)
         P;
         C1;
         C2;
@@ -73,46 +73,49 @@ classdef RRS_2RRU_Basic < handle
             vec_A2C2 = obj.C2 - obj.A2;
             vec_A3C3 = obj.C3 - obj.A3;
             
-            %theta11
-            nom = 2*obj.L1*vec_A1C1(3) - sqrt(((obj.L1+obj.L2)^2-vec_A1C1(1)^2-vec_A1C1(3)^2) * (vec_A1C1(1)^2+vec_A1C1(3)^2 - (obj.L1-obj.L2)^2));
-            demon = (vec_A1C1(1)+obj.L1)^2 + vec_A1C1(3)^2 - obj.L2^2;
-            thetas(1) = 2*atan(nom/demon);
+            %theta11(R-R-R crank)
+            delta = atan2(vec_A1C1(3), vec_A1C1(1));
+            d = norm(vec_A1C1);
+            gamma = acos((d^2 + obj.L1^2 - obj.L2^2)/(2*d*obj.L1));
+            thetas(1) = delta - gamma;
             
-            %theta12
-            nom = 2*obj.L1*vec_A2C2(3) - sqrt(((obj.L1+obj.L2)^2-vec_A2C2(1)^2-vec_A2C2(3)^2) * (vec_A2C2(1)^2+vec_A2C2(3)^2 - (obj.L1-obj.L2)^2));
-            demon = (vec_A2C2(1)+obj.L1)^2 + vec_A2C2(3)^2 - obj.L2^2;
-            thetas(2) = pi - 2*atan(nom/demon);
+            %theta12(R-R-R crank)
+            delta = atan2(vec_A2C2(3), vec_A2C2(1));
+            d = norm(vec_A2C2);
+            gamma = acos((d^2 + obj.L1^2 - obj.L2^2)/(2*d*obj.L1));
+            thetas(2) = gamma + delta;
 
-            %theta13
-            nom = 2*obj.L1*vec_A3C3(3) - sqrt(((obj.L1+obj.L2)^2-vec_A3C3(2)^2-vec_A3C3(3)^2) * (vec_A3C3(2)^2+vec_A3C3(3)^2 - (obj.L1-obj.L2)^2));
-            demon = (vec_A3C3(2)+obj.L1)^2 + vec_A3C3(3)^2 - obj.L2^2;
-            thetas(3) = 2*atan(nom/demon);
+            %theta13(R-R-R crank)
+            delta = atan2(vec_A3C3(3), vec_A3C3(2));
+            d = norm(vec_A3C3);
+            gamma = acos((d^2 + obj.L1^2 - obj.L2^2)/(2*d*obj.L1));
+            thetas(3) = delta - gamma;
             
             obj.thetas = thetas;
 
             %update Bi
             obj.B1 = obj.A1 + eul2rotm([0, -thetas(1), 0], "ZYX") * [obj.L1; 0; 0];
             obj.B2 = obj.A2 + eul2rotm([0, -thetas(2), 0], "ZYX") * [obj.L1; 0; 0];
-            obj.B3 = obj.A3 + eul2rotm([0, 0, thetas(3)], "ZYX") * [0; 0; obj.L1];
+            obj.B3 = obj.A3 + eul2rotm([0, 0, thetas(3)], "ZYX") * [0; obj.L1; 0];
         end
         
         function J_a = getActuationJacob(obj)
             %GETACTUATIONJACOB J_a*dX_p = [dtheta11; dtheta21; dtheta31]
-            b1 = obj.B1 - obj.A1;
-            b2 = obj.B2 - obj.A2;
-            b3 = obj.B3 - obj.A3;
+            b1 = (obj.B1 - obj.A1)/obj.L1;
+            b2 = (obj.B2 - obj.A2)/obj.L1;
+            b3 = (obj.B3 - obj.A3)/obj.L1;
 
-            c11 = obj.C1 - obj.B1;
-            c21 = obj.C2 - obj.B2;
-            c31 = obj.C3 - obj.B3;
+            c11 = (obj.C1 - obj.B1)/obj.L2;
+            c21 = (obj.C2 - obj.B2)/obj.L2;
+            c31 = (obj.C3 - obj.B3)/obj.L2;
 
-            c12 = obj.C1 - obj.P;
-            c22 = obj.C2 - obj.P;
-            c32 = obj.C3 - obj.P;
+            c12 = (obj.C1 - obj.P)/obj.r;
+            c22 = (obj.C2 - obj.P)/obj.r;
+            c32 = (obj.C3 - obj.P)/obj.r;
 
-            s1 = [0;1;0];
-            s2 = [0;1;0];
-            s3 = [1;0;0];
+            s1 = [0;-1;0]; %theta1
+            s2 = [0;-1;0]; %theta2
+            s3 = [1;0;0]; %theta3
 
             J_1a = [obj.r*(cross(c12,c11)'), c11'] ./ (obj.L1*dot(cross(b1,c11), s1));
             J_2a = [obj.r*(cross(c22,c21)'), c21'] ./ (obj.L1*dot(cross(b2,c21), s2));
@@ -155,8 +158,8 @@ classdef RRS_2RRU_Basic < handle
             
             R_p = obj.calEndEffectorSO3(alpha, beta);
             r_tool = R_p * [0; 0; obj.toolHight];
-            trans = [eye(6),        zeros(6);
-                    -skewMatrix(r_tool),     eye(6)];
+            trans = [eye(3),        zeros(3);
+                    -skewMatrix(r_tool),     eye(3)];
             
             J_rt = trans * J_rp;
         end
@@ -170,13 +173,13 @@ classdef RRS_2RRU_Basic < handle
             wrench_tool = [torque_body; force_body]; %wrench in tool center frame
             
             %transform (adjoint map to P frame)
-            r_tool = obj.R_P * [0; 0; obj.toolHight];
-            trans = [eye(6),        zeros(6);
-                    -skewMatrix(r_tool),     eye(6)];
-            
-            wrench_P = trans' * blkdiag(obj.R_P, obj.R_P) * wrench_tool;
+            Tf_P_BTC = [obj.R_P,    [0; 0; obj.toolHight];
+                                    zeros(1,3),           1];
 
-            torque_actuate = pinv(J_a') * wrench_P;
+            wrench_P = adjointMatrix(Tf_P_BTC)' * wrench_tool;
+
+%             torque_actuate = pinv(J_a') * wrench_P;
+            torque_actuate = (J_a')\(blkdiag(obj.R_P, obj.R_P)' *  wrench_P);
         end
 
     end
