@@ -1,0 +1,1 @@
+controller_joint_names: ['RRS_R1', 'RRU1_R1', 'RRU1_R2', 'RRU1_U_R1', 'RRU1_U_R2', 'RRU2_R1', 'RRU2_R2', 'RRU2_U_R1', 'RRU2_U_R2', 'RRS_R1', 'RRS_R2', 'float', ]

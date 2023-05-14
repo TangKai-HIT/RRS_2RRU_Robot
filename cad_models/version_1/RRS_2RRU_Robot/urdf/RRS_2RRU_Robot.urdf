@@ -1,0 +1,1228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
+     Commit Version: 1.5.1-0-g916b5db  Build Version: 1.5.7152.31018
+     For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
+<robot
+  name="RRS_2RRU_Robot">
+  <link
+    name="base_link">
+    <inertial>
+      <origin
+        xyz="-7.76166956356727E-18 0.0140409083235951 -0.0218537675549737"
+        rpy="0 0 0" />
+      <mass
+        value="1.19665273558523" />
+      <inertia
+        ixx="0.00230306122734758"
+        ixy="-2.07182695248452E-19"
+        ixz="-9.40017174330354E-20"
+        iyy="0.00478440791841207"
+        iyz="-2.02172249532618E-05"
+        izz="0.00694333882709958" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://RRS_2RRU_Robot/meshes/base_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://RRS_2RRU_Robot/meshes/base_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="RRS_R1"
+    type="revolute">
+    <origin
+      xyz="0 0.08 0"
+      rpy="1.5708 -0.27201 1.5708" />
+    <parent
+      link="base_link" />
+    <child
+      link="RRS_Link1" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="0"
+      upper="1.309"
+      effort="10"
+      velocity="1.5708" />
+  </joint>
+  <link
+    name="RRU1_Link1">
+    <inertial>
+      <origin
+        xyz="0.0975885815319073 6.93889390390723E-18 0"
+        rpy="0 0 0" />
+      <mass
+        value="0.144271841570521" />
+      <inertia
+        ixx="1.97048007053921E-05"
+        ixy="4.7857361519868E-20"
+        ixz="1.02664955648997E-20"
+        iyy="0.000452019686276695"
+        iyz="2.84007504227131E-21"
+        izz="0.000447874716100541" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://RRS_2RRU_Robot/meshes/RRU1_Link1.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://RRS_2RRU_Robot/meshes/RRU1_Link1.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="RRU1_R1"
+    type="revolute">
+    <origin
+      xyz="0.08 0 0"
+      rpy="1.5707963267949 -0.436332312998584 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="RRU1_Link1" />
+    <axis
+      xyz="0 0 -1" />
+    <limit
+      lower="0"
+      upper="0"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="RRU1_Link2">
+    <inertial>
+      <origin
+        xyz="0.0722392895761914 0 0"
+        rpy="0 0 0" />
+      <mass
+        value="0.089716699395947" />
+      <inertia
+        ixx="3.66479817944944E-06"
+        ixy="3.20813728772566E-20"
+        ixz="9.301050615672E-21"
+        iyy="0.000276130062903445"
+        iyz="7.7780018644682E-22"
+        izz="0.000274992779250899" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://RRS_2RRU_Robot/meshes/RRU1_Link2.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://RRS_2RRU_Robot/meshes/RRU1_Link2.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="RRU1_R2"
+    type="revolute">
+    <origin
+      xyz="0.16 0 0"
+      rpy="0 0 1.99050937516222" />
+    <parent
+      link="RRU1_Link1" />
+    <child
+      link="RRU1_Link2" />
+    <axis
+      xyz="0 0 -1" />
+    <limit
+      lower="-3.1416"
+      upper="3.1416"
+      effort="100"
+      velocity="100" />
+  </joint>
+  <link
+    name="RRU1_U_Link1">
+    <inertial>
+      <origin
+        xyz="0.17906016331679 -1.5690226895515E-13 1.76982387078972E-12"
+        rpy="0 0 0" />
+      <mass
+        value="0.00656907660025569" />
+      <inertia
+        ixx="5.67646282478017E-07"
+        ixy="2.38529771902731E-17"
+        ixz="1.24771349583572E-16"
+        iyy="7.48716697243369E-07"
+        iyz="1.41812036723473E-17"
+        izz="5.17990170616774E-07" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://RRS_2RRU_Robot/meshes/RRU1_U_Link1.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://RRS_2RRU_Robot/meshes/RRU1_U_Link1.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="RRU1_U"
+    type="fixed">
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="RRU1_Link2" />
+    <child
+      link="RRU1_U_Link1" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="RRU1_U_Link2">
+    <inertial>
+      <origin
+        xyz="3.05311331771918E-16 -8.88178419700125E-16 -1.2490009027033E-16"
+        rpy="0 0 0" />
+      <mass
+        value="0.00287342104446696" />
+      <inertia
+        ixx="6.87704997673083E-08"
+        ixy="-2.38295091021394E-23"
+        ixz="-9.57864130195925E-25"
+        iyy="1.23735804834515E-07"
+        iyz="-3.13287011584678E-23"
+        izz="6.87704997673083E-08" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://RRS_2RRU_Robot/meshes/RRU1_U_Link2.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://RRS_2RRU_Robot/meshes/RRU1_U_Link2.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="RRU1_U_R1"
+    type="revolute">
+    <origin
+      xyz="0.192 0 0"
+      rpy="0 0 -2.4268416881608" />
+    <parent
+      link="RRU1_U_Link1" />
+    <child
+      link="RRU1_U_Link2" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-3.1416"
+      upper="3.1416"
+      effort="100"
+      velocity="100" />
+  </joint>
+  <link
+    name="RRU1_U_Link3">
+    <inertial>
+      <origin
+        xyz="-1.28196064874686E-15 0.0129398366864309 1.40056022335244E-12"
+        rpy="0 0 0" />
+      <mass
+        value="0.0065690765973461" />
+      <inertia
+        ixx="7.48716696979288E-07"
+        ixy="-3.12812602980976E-19"
+        ixz="4.57736003447938E-19"
+        iyy="5.67646282232777E-07"
+        iyz="-3.6158716855582E-17"
+        izz="5.1799017043007E-07" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://RRS_2RRU_Robot/meshes/RRU1_U_Link3.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://RRS_2RRU_Robot/meshes/RRU1_U_Link3.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="RRU1_U_R2"
+    type="revolute">
+    <origin
+      xyz="0 0 0"
+      rpy="0 1.5707963267949 0" />
+    <parent
+      link="RRU1_U_Link2" />
+    <child
+      link="RRU1_U_Link3" />
+    <axis
+      xyz="0 0 -1" />
+    <limit
+      lower="-3.1416"
+      upper="3.1416"
+      effort="100"
+      velocity="100" />
+  </joint>
+  <link
+    name="RRU1_dummy">
+    <inertial>
+      <origin
+        xyz="2.4980018054066E-16 0.02 6.93889390390723E-17"
+        rpy="0 0 0" />
+      <mass
+        value="0.000932005820564972" />
+      <inertia
+        ixx="9.32005820564971E-09"
+        ixy="7.3468396926393E-40"
+        ixz="-2.46789833609961E-42"
+        iyy="9.32005820564971E-09"
+        iyz="-7.3468396926393E-40"
+        izz="9.32005820564971E-09" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://RRS_2RRU_Robot/meshes/RRU1_dummy.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://RRS_2RRU_Robot/meshes/RRU1_dummy.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="RRU1_dummy"
+    type="fixed">
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="RRU1_U_Link3" />
+    <child
+      link="RRU1_dummy" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="RRU2_Link1">
+    <inertial>
+      <origin
+        xyz="0.0975885815319086 -3.14331893846997E-15 8.56953397132543E-16"
+        rpy="0 0 0" />
+      <mass
+        value="0.144271841570521" />
+      <inertia
+        ixx="1.9704800705392E-05"
+        ixy="-3.81164826264435E-20"
+        ixz="-1.50664780122856E-20"
+        iyy="0.000452019686276695"
+        iyz="5.77594031255703E-21"
+        izz="0.00044787471610054" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://RRS_2RRU_Robot/meshes/RRU2_Link1.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://RRS_2RRU_Robot/meshes/RRU2_Link1.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="RRU2_R1"
+    type="revolute">
+    <origin
+      xyz="-0.08 0 0"
+      rpy="-1.5707963267949 -0.436332312998584 -3.14159265358979" />
+    <parent
+      link="base_link" />
+    <child
+      link="RRU2_Link1" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-1.309"
+      upper="0.01"
+      effort="10"
+      velocity="1.5708" />
+  </joint>
+  <link
+    name="RRU2_Link2">
+    <inertial>
+      <origin
+        xyz="0.0722392895761936 2.52575738102223E-15 -1.90819582357449E-17"
+        rpy="0 0 0" />
+      <mass
+        value="0.089716699395947" />
+      <inertia
+        ixx="3.66479817944938E-06"
+        ixy="-1.59877468794249E-20"
+        ixz="2.30875431947105E-21"
+        iyy="0.000276130062903445"
+        iyz="-2.35098675283526E-21"
+        izz="0.000274992779250899" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://RRS_2RRU_Robot/meshes/RRU2_Link2.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://RRS_2RRU_Robot/meshes/RRU2_Link2.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="RRU2_R2"
+    type="revolute">
+    <origin
+      xyz="0.16 0 0"
+      rpy="0 0 -1.99050937516221" />
+    <parent
+      link="RRU2_Link1" />
+    <child
+      link="RRU2_Link2" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-3.1416"
+      upper="3.1416"
+      effort="100"
+      velocity="100" />
+  </joint>
+  <link
+    name="RRU2_U_Link1">
+    <inertial>
+      <origin
+        xyz="0.17906016331679 1.62037050444042E-13 -1.76967641929426E-12"
+        rpy="0 0 0" />
+      <mass
+        value="0.00656907660025568" />
+      <inertia
+        ixx="5.67646282478017E-07"
+        ixy="-2.38524742644607E-17"
+        ixz="-1.24771548807517E-16"
+        iyy="7.48716697243367E-07"
+        iyz="1.41813759603587E-17"
+        izz="5.17990170616772E-07" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://RRS_2RRU_Robot/meshes/RRU2_U_Link1.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://RRS_2RRU_Robot/meshes/RRU2_U_Link1.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="RRU2_U"
+    type="fixed">
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="RRU2_Link2" />
+    <child
+      link="RRU2_U_Link1" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="RRU2_U_Link2">
+    <inertial>
+      <origin
+        xyz="-3.37230243729891E-15 3.88578058618805E-15 2.95943825001643E-15"
+        rpy="0 0 0" />
+      <mass
+        value="0.00287342104446696" />
+      <inertia
+        ixx="6.87704997673084E-08"
+        ixy="-5.90652810224936E-24"
+        ixz="-4.17468692901069E-23"
+        iyy="1.23735804834515E-07"
+        iyz="-3.91645197948604E-23"
+        izz="6.87704997673083E-08" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://RRS_2RRU_Robot/meshes/RRU2_U_Link2.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://RRS_2RRU_Robot/meshes/RRU2_U_Link2.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="RRU2_U_R1"
+    type="revolute">
+    <origin
+      xyz="0.192 0 0"
+      rpy="0 0 -0.714750965428995" />
+    <parent
+      link="RRU2_U_Link1" />
+    <child
+      link="RRU2_U_Link2" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-3.1416"
+      upper="3.1416"
+      effort="100"
+      velocity="100" />
+  </joint>
+  <link
+    name="RRU2_U_Link3">
+    <inertial>
+      <origin
+        xyz="2.00013616780126E-15 0.0129398366864348 -1.40372435897262E-12"
+        rpy="0 0 0" />
+      <mass
+        value="0.00656907659734609" />
+      <inertia
+        ixx="7.48716696979289E-07"
+        ixy="3.12848698203319E-19"
+        ixz="4.5771995248512E-19"
+        iyy="5.67646282232778E-07"
+        iyz="3.61578246831446E-17"
+        izz="5.17990170430072E-07" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://RRS_2RRU_Robot/meshes/RRU2_U_Link3.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://RRS_2RRU_Robot/meshes/RRU2_U_Link3.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="RRU2_U_R2"
+    type="revolute">
+    <origin
+      xyz="0 0 0"
+      rpy="0 1.5707963267949 0" />
+    <parent
+      link="RRU2_U_Link2" />
+    <child
+      link="RRU2_U_Link3" />
+    <axis
+      xyz="0 0 -1" />
+    <limit
+      lower="-3.1416"
+      upper="3.1416"
+      effort="100"
+      velocity="100" />
+  </joint>
+  <link
+    name="RRU2_dummy">
+    <inertial>
+      <origin
+        xyz="0.205108587040952 0.0151051297839441 -2.41646980203569E-15"
+        rpy="0 0 0" />
+      <mass
+        value="0.000932005820564972" />
+      <inertia
+        ixx="9.32005820564971E-09"
+        ixy="8.27180612553028E-25"
+        ixz="0"
+        iyy="9.32005820564972E-09"
+        iyz="-4.40810381558358E-39"
+        izz="9.32005820564971E-09" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://RRS_2RRU_Robot/meshes/RRU2_dummy.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://RRS_2RRU_Robot/meshes/RRU2_dummy.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="RRU2_dummy"
+    type="fixed">
+    <origin
+      xyz="0 -0.125842435593135 -0.145009245925864"
+      rpy="-1.5707963267949 -0.856045361365902 1.5707963267949" />
+    <parent
+      link="RRU2_U_Link3" />
+    <child
+      link="RRU2_dummy" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="RRS_Link1">
+    <inertial>
+      <origin
+        xyz="0.0975885815319073 2.22044604925031E-16 1.15932656940577E-18"
+        rpy="0 0 0" />
+      <mass
+        value="0.144271841570521" />
+      <inertia
+        ixx="1.97048007053921E-05"
+        ixy="-2.96461531539005E-20"
+        ixz="-2.41226778487625E-20"
+        iyy="0.000452019686276695"
+        iyz="6.05911285119448E-21"
+        izz="0.00044787471610054" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://RRS_2RRU_Robot/meshes/RRS_Link1.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://RRS_2RRU_Robot/meshes/RRS_Link1.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="RRS_R1"
+    type="revolute">
+    <origin
+      xyz="0 0.0800000000000003 0"
+      rpy="1.5707963267949 -0.436332313013355 1.5707963267949" />
+    <parent
+      link="base_link" />
+    <child
+      link="RRS_Link1" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="0"
+      upper="1.309"
+      effort="10"
+      velocity="1.5708" />
+  </joint>
+  <link
+    name="RRS_Link2">
+    <inertial>
+      <origin
+        xyz="0.0940004861650289 1.15990550497713E-13 6.44530551019736E-18"
+        rpy="0 0 0" />
+      <mass
+        value="0.110394756666632" />
+      <inertia
+        ixx="4.59788728987011E-06"
+        ixy="-2.03931419446885E-15"
+        ixz="-1.18370694427755E-20"
+        iyy="0.000504756772056939"
+        iyz="1.40757175136123E-22"
+        izz="0.000503625671953288" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://RRS_2RRU_Robot/meshes/RRS_Link2.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://RRS_2RRU_Robot/meshes/RRS_Link2.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="RRS_R2"
+    type="revolute">
+    <origin
+      xyz="0.16 0 0"
+      rpy="0 0 1.99050937516221" />
+    <parent
+      link="RRS_Link1" />
+    <child
+      link="RRS_Link2" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-3.1416"
+      upper="3.1416"
+      effort="100"
+      velocity="100" />
+  </joint>
+  <link
+    name="RRS_dummy">
+    <inertial>
+      <origin
+        xyz="-8.32667268468867E-17 -2.77555756156289E-17 -6.72320030524623E-20"
+        rpy="0 0 0" />
+      <mass
+        value="0.000932005820564972" />
+      <inertia
+        ixx="9.32005820564971E-09"
+        ixy="-4.13590306276514E-25"
+        ixz="1.11167797968887E-41"
+        iyy="9.32005820564971E-09"
+        iyz="4.66441589997106E-41"
+        izz="9.32005820564971E-09" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://RRS_2RRU_Robot/meshes/RRS_dummy.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://RRS_2RRU_Robot/meshes/RRS_dummy.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="RRS_dummy"
+    type="fixed">
+    <origin
+      xyz="0.192 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="RRS_Link2" />
+    <child
+      link="RRS_dummy" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="float_platform">
+    <inertial>
+      <origin
+        xyz="4.9599E-12 0.0021304 0.1519"
+        rpy="0 0 0" />
+      <mass
+        value="4.3105" />
+      <inertia
+        ixx="0.024889"
+        ixy="-1.3632E-12"
+        ixz="-1.8083E-12"
+        iyy="0.025232"
+        iyz="-0.00067008"
+        izz="0.0057379" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://RRS_2RRU_Robot/meshes/float_platform.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.89804 0.91765 0.92941 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://RRS_2RRU_Robot/meshes/float_platform.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="float"
+    type="floating">
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="float_platform" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="platform_dummy1">
+    <inertial>
+      <origin
+        xyz="0.08 -3.8164E-17 0.02"
+        rpy="0 0 0" />
+      <mass
+        value="0.00093201" />
+      <inertia
+        ixx="9.3201E-09"
+        ixy="0"
+        ixz="0"
+        iyy="9.3201E-09"
+        iyz="0"
+        izz="9.3201E-09" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://RRS_2RRU_Robot/meshes/platform_dummy1.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://RRS_2RRU_Robot/meshes/platform_dummy1.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="P_fixed1"
+    type="fixed">
+    <origin
+      xyz="0 0 0.19346"
+      rpy="0 0 0" />
+    <parent
+      link="float_platform" />
+    <child
+      link="platform_dummy1" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="platform_dummy2">
+    <inertial>
+      <origin
+        xyz="-0.08 1.0408E-17 0.02"
+        rpy="0 0 0" />
+      <mass
+        value="0.00093201" />
+      <inertia
+        ixx="9.3201E-09"
+        ixy="0"
+        ixz="0"
+        iyy="9.3201E-09"
+        iyz="0"
+        izz="9.3201E-09" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://RRS_2RRU_Robot/meshes/platform_dummy2.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://RRS_2RRU_Robot/meshes/platform_dummy2.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="P_fixed2"
+    type="fixed">
+    <origin
+      xyz="0 0 0.19346"
+      rpy="0 0 0" />
+    <parent
+      link="float_platform" />
+    <child
+      link="platform_dummy2" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="platform_dummy3">
+    <inertial>
+      <origin
+        xyz="2.8596E-12 0.08 1.1102E-16"
+        rpy="0 0 0" />
+      <mass
+        value="0.00093201" />
+      <inertia
+        ixx="9.3201E-09"
+        ixy="0"
+        ixz="0"
+        iyy="9.3201E-09"
+        iyz="9.5481E-58"
+        izz="9.3201E-09" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://RRS_2RRU_Robot/meshes/platform_dummy3.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://RRS_2RRU_Robot/meshes/platform_dummy3.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="P_fixed3"
+    type="fixed">
+    <origin
+      xyz="0 0 0.19346"
+      rpy="0 0 0" />
+    <parent
+      link="float_platform" />
+    <child
+      link="platform_dummy3" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="BTC_dummy">
+    <inertial>
+      <origin
+        xyz="-2.00212363301894E-17 -6.93889390390723E-17 0.132"
+        rpy="0 0 0" />
+      <mass
+        value="0.000932005820564972" />
+      <inertia
+        ixx="9.32005820564971E-09"
+        ixy="0"
+        ixz="0"
+        iyy="9.32005820564971E-09"
+        iyz="1.10996110130172E-57"
+        izz="9.32005820564971E-09" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://RRS_2RRU_Robot/meshes/BTC_dummy.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://RRS_2RRU_Robot/meshes/BTC_dummy.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="P_fixed_btc"
+    type="fixed">
+    <origin
+      xyz="0 0 0.193461357471647"
+      rpy="0 0 0" />
+    <parent
+      link="float_platform" />
+    <child
+      link="BTC_dummy" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="P_dummy">
+    <inertial>
+      <origin
+        xyz="-8.1188E-17 -3.4694E-18 2.7756E-17"
+        rpy="0 0 0" />
+      <mass
+        value="0.00093201" />
+      <inertia
+        ixx="9.3201E-09"
+        ixy="0"
+        ixz="0"
+        iyy="9.3201E-09"
+        iyz="-2.7918E-58"
+        izz="9.3201E-09" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://RRS_2RRU_Robot/meshes/P_dummy.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://RRS_2RRU_Robot/meshes/P_dummy.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="P_fixed_p"
+    type="fixed">
+    <origin
+      xyz="0 0 0.19346"
+      rpy="0 0 0" />
+    <parent
+      link="float_platform" />
+    <child
+      link="P_dummy" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+</robot>
