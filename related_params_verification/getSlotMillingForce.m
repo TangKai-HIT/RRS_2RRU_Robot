@@ -1,4 +1,4 @@
-function [Force_x, Force_y, Force, Torque, Power, t, phi] = getSlotMillingForce(Ks, beta, b, feedRate, d, Nt, omega, steps)
+function [Force_x, Force_y, Force, Torque, Power, t, phi] = getSlotMillingForce(Ks, beta, b, feedRate, d, Nt, omega, steps, ifPlot)
 %GETSLOTMILLINGFORCE
 %   Inputs:
 %       Ks: material cutting force per unit area, N/mm^2
@@ -84,55 +84,62 @@ end             % cnt1 loop
 
 % Calculate resultant force
 Force = (Force_x.^2 + Force_y.^2).^0.5; % N
-time = tooth_angle/omega*60/360;
+% time = tooth_angle/omega*60/360;
 
-figure(1)
-plot(tooth_angle, Force_x, 'r:', tooth_angle, Force_y, 'b--', tooth_angle, Force, 'k')
-% axis([0 360 -150 400])
-xlim([0 360]);
-set(gca,'FontSize', 12)
-xlabel('\phi (deg)')
-ylabel('Force (N)')
-legend('F_x', 'F_y', 'F')
+%% Plot
+if ~exist("ifPlot", "var")
+    ifPlot = true;
+end
 
-figure(2)
-plot(t, Force_x, 'r:', t, Force_y, 'b--', t, Force, 'k')
-% axis([0 0.008 -150 400])
-xlim([0 0.008]);
-set(gca,'FontSize', 12)
-xlabel('t (s)')
-ylabel('Force (N)')
-legend('F_x', 'F_y', 'F')
-
-% plot Torque & Power
-%x--phi
-figure;
-subplot(2,1,1);
-plot(tooth_angle, Torque, 'k');
-xlim([0 360]);
-set(gca,'FontSize', 12)
-xlabel('\phi (deg)')
-ylabel('Torque (N*m)')
-
-subplot(2,1,2);
-plot(tooth_angle, Power, 'k');
-xlim([0 360]);
-set(gca,'FontSize', 12)
-xlabel('\phi (deg)')
-ylabel('Power (W)')
-
-%x--t
-figure;
-subplot(2,1,1);
-plot(t, Torque, 'r');
-xlim([0 0.008]);
-set(gca,'FontSize', 12)
-xlabel('t (s)')
-ylabel('Torque (N*m)')
-
-subplot(2,1,2);
-plot(t, Power, 'r');
-xlim([0 0.008]);
-set(gca,'FontSize', 12)
-xlabel('t (s)')
-ylabel('Power (W)')
+if ifPlot
+    figure(1)
+    plot(tooth_angle, Force_x, 'r:', tooth_angle, Force_y, 'b--', tooth_angle, Force, 'k')
+    % axis([0 360 -150 400])
+    xlim([0 360]);
+    set(gca,'FontSize', 12)
+    xlabel('\phi (deg)')
+    ylabel('Force (N)')
+    legend('F_x', 'F_y', 'F')
+    
+    figure(2)
+    plot(t, Force_x, 'r:', t, Force_y, 'b--', t, Force, 'k')
+    % axis([0 0.008 -150 400])
+    xlim([0 0.008]);
+    set(gca,'FontSize', 12)
+    xlabel('t (s)')
+    ylabel('Force (N)')
+    legend('F_x', 'F_y', 'F')
+    
+    % plot Torque & Power
+    %x--phi
+    figure;
+    subplot(2,1,1);
+    plot(tooth_angle, Torque, 'k');
+    xlim([0 360]);
+    set(gca,'FontSize', 12)
+    xlabel('\phi (deg)')
+    ylabel('Torque (N*m)')
+    
+    subplot(2,1,2);
+    plot(tooth_angle, Power, 'k');
+    xlim([0 360]);
+    set(gca,'FontSize', 12)
+    xlabel('\phi (deg)')
+    ylabel('Power (W)')
+    
+    %x--t
+    figure;
+    subplot(2,1,1);
+    plot(t, Torque, 'r');
+    xlim([0 0.008]);
+    set(gca,'FontSize', 12)
+    xlabel('t (s)')
+    ylabel('Torque (N*m)')
+    
+    subplot(2,1,2);
+    plot(t, Power, 'r');
+    xlim([0 0.008]);
+    set(gca,'FontSize', 12)
+    xlabel('t (s)')
+    ylabel('Power (W)')
+end
