@@ -9,9 +9,14 @@ classdef RRS_2RRU_Basic < handle
         L2;
         toolHight; %cutter BTC hight (z) in P frame
         thetas;
+        gravity = [0;0;-9.8]; %gravity
     end
 
     properties(SetAccess=private, GetAccess=public)
+        %spindle mass
+        spindle_mass;
+        spindle_mass_center_p;
+
         %inverse kinematic points
         P;
         C1;
@@ -239,7 +244,7 @@ classdef RRS_2RRU_Basic < handle
         end
 
         function torque_actuate = getStaticForce_tool(obj, torque_body, force_body)
-            %GETSTATICFORCE_TOOL get equilibrium torque on actuators when setting wrench on tool center 
+            %GETSTATICFORCE_TOOL get equilibrium actuation torque on actuators when setting wrench on tool center 
             %   Inputs:
             %       torque_body, force_body: 3 X 1, torque & force in local BTC frame
 
@@ -257,8 +262,13 @@ classdef RRS_2RRU_Basic < handle
             torque_actuate = - (J_a*J_rp)' \ (J_rp' *  wrench_P);
         end
 
-        function f = plotToolWorkSpace(obj, zp_range, alpha_range, beta_range, N_zp)
+        function [f, zp_space, maxId] = plotToolWorkSpace(obj, zp_range, alpha_range, beta_range, N_zp)
             %PLOTTOOLWORKSPACE plot tool tip workspace
+            %   Outputs:
+            %       f: figure object handle
+            %       zp_space: discretized z_p slices
+            %       maxId: index of the z_p slice having the maximum area of workspace
+
             N = 100;
             zp_space = linspace(zp_range(1), zp_range(2), N_zp);
             alpha_space = linspace(alpha_range(1), alpha_range(2), N);
@@ -268,8 +278,10 @@ classdef RRS_2RRU_Basic < handle
             
             singular_tol = 0.02; %singularity check tolerance
             cond_tol = 0.02; %condition number check tolerance
-
-            for cur_zp = zp_space
+            
+            maxNumSamples = 0; 
+            for i = 1:N_zp
+                cur_zp = zp_space(i);
                 x_tool = [];
                 y_tool = [];
                 z_tool = [];
@@ -308,6 +320,11 @@ classdef RRS_2RRU_Basic < handle
 
                 %plot layer on zp_i
                 if ~isempty(x_tool)
+                    if length(x_tool) > maxNumSamples
+                        maxNumSamples = length(x_tool);
+                        maxId = i;
+                    end
+
                     [X_tool,Y_tool]=meshgrid(linspace(min(x_tool),max(x_tool),N), linspace(min(y_tool),max(y_tool),N));
                     Z_tool=griddata(x_tool, y_tool, z_tool, X_tool, Y_tool);
 
@@ -322,6 +339,26 @@ classdef RRS_2RRU_Basic < handle
                     hold on
                 end
             end
+        end
+        
+        function setSpindleMass(obj, mass, mass_center_p)
+            %SETSPINDLEMASS
+            obj.spindle_mass = mass;
+            obj.spindle_mass_center_p = mass_center_p;
+        end
+        
+        function G_actuate = getEquGravityForce(obj)
+            %GETEQUGRAVITYFORCE get equilibrium actuation torque on actuators to balance gravity
+            G_spindle = obj.spindle_mass * obj.gravity;
+            %transform (adjoint map to P frame that aligned with base frame)
+            Tf_Pa_spindle = [eye(3),    obj.R_P*obj.spindle_mass_center_p;
+                                    zeros(1,3),           1];
+            wrench_P = (adjointMatrix(getInvSE3(Tf_Pa_spindle))') * [zeros(3,1); G_spindle];
+
+            J_a = obj.getActuationJacob();
+            [~, J_rp] = obj.getOutputJacob();
+
+            G_actuate = - (J_a*J_rp)' \ (J_rp' *  wrench_P);
         end
 
     end
