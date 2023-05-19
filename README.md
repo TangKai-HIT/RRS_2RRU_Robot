@@ -3,3 +3,5 @@
 - Jacobian analysis  
 - Workspace analysis  
 - Flat-end milling condition  
+
+Including matlab class, simscape models, adams models and urdfs.  
