@@ -17,9 +17,18 @@ classdef RRS_2RRU_Basic < handle
         spindle_mass;
         spindle_mass_center_p;
 
+        %screws
+        s11 = [0;-1;0]; %theta11
+        s12 = [0;-1;0]; %theta12
+        s21 = [0;-1;0]; %theta21
+        s22 = [0;-1;0]; %theta22
+        s31 = [1;0;0]; %theta31
+        s32 = [1;0;0]; %theta32
+
         %inverse kinematic points
         P;
         C1;
+        
         C2;
         C3;
         B1;
@@ -153,14 +162,19 @@ classdef RRS_2RRU_Basic < handle
             J_a = J_theta_a \ J_X_a;
         end
 
+        function J_pa = getPassiveJacob(obj)
+            %GETPASSIVEJACOB J_pa*dX_p = [dtheta12; dtheta22; dtheta32]
+
+            J_pa_1 = [obj.r*cross(obj.c12, obj.b1)', obj.c11']./(obj.L2*dot(cross(obj.c11, obj.b1), obj.s12));
+            J_pa_2 = [obj.r*cross(obj.c22, obj.b2)', obj.c21']./(obj.L2*dot(cross(obj.c21, obj.b2), obj.s22));
+            J_pa_3 = [obj.r*cross(obj.c32, obj.b3)', obj.c31']./(obj.L2*dot(cross(obj.c31, obj.b3), obj.s32));
+            J_pa = [J_pa_1; J_pa_2; J_pa_3];
+        end
+
         function [J_theta_a, J_X_a] = getSplitedActuationJacob(obj)
-            %GETSPLITEDACTUATIONJACOB J_theta_a * dtheta = J_X_a * dX_a
+            %GETSPLITEDACTUATIONJACOB J_theta_a * dtheta = J_X_a * dX_p
 
-            s1 = [0;-1;0]; %theta1
-            s2 = [0;-1;0]; %theta2
-            s3 = [1;0;0]; %theta3
-
-            J_theta_a = obj.L1 * blkdiag(dot(cross(obj.b1,obj.c11), s1), dot(cross(obj.b2,obj.c21), s2), dot(cross(obj.b3,obj.c31), s3));
+            J_theta_a = obj.L1 * blkdiag(dot(cross(obj.b1,obj.c11), obj.s11), dot(cross(obj.b2,obj.c21), obj.s21), dot(cross(obj.b3,obj.c31), obj.s31));
             
             J_X_1a = [obj.r*(cross(obj.c12,obj.c11)'), obj.c11'];
             J_X_2a = [obj.r*(cross(obj.c22,obj.c21)'), obj.c21'];
@@ -260,6 +274,44 @@ classdef RRS_2RRU_Basic < handle
             [~, J_rp] = obj.getOutputJacob();
 
             torque_actuate = - (J_a*J_rp)' \ (J_rp' *  wrench_P);
+        end
+
+        function [dthetas1, dthetas2] = getRRJointsVel(obj, dX_p)
+            %GETRRJOINTSVEL get velocity of RR-joints
+            %   Output:
+            %       dthetas1: 3 X 1, actuation joints
+            %       dthetas2: 3 X 1, passive joints
+
+            J_a = getActuationJacob(obj);
+            dthetas1 = J_a * dX_p;
+            
+            J_pa = getPassiveJacob(obj);
+            dthetas2 = J_pa * dX_p;
+        end
+
+        function ddthetas = getActuationAccel(obj, dX_p, ddX_p)
+            %GETACTUATIONACCEL get dotdot_theta under current config
+            omega_p = dX_p(1:3);
+            
+            [dthetas1, dthetas2] = getRRJointsVel(obj, dX_p);
+            omega_11 = dthetas1(1)*obj.s11;
+            omega_21 = dthetas1(2)*obj.s21;
+            omega_31 = dthetas1(3)*obj.s31;
+            omega_12 = dthetas2(1)*obj.s12;
+            omega_22 = dthetas2(2)*obj.s22;
+            omega_32 = dthetas2(3)*obj.s32;
+            
+            [J_theta_a, J_X_a] = getSplitedActuationJacob(obj);
+
+            delta_11 = obj.r*((obj.c11'*omega_p)*(obj.c12'*omega_p) - (omega_p'*omega_p)*(obj.c11'*obj.c12))...
+                        + obj.L1*(omega_11'*omega_11)*(obj.c11'*obj.b1) + obj.L2*(omega_12'*omega_12);
+            delta_21 = obj.r*((obj.c21'*omega_p)*(obj.c22'*omega_p) - (omega_p'*omega_p)*(obj.c21'*obj.c22))...
+                        + obj.L1*(omega_21'*omega_21)*(obj.c21'*obj.b2) + obj.L2*(omega_22'*omega_22);
+            delta_31 = obj.r*((obj.c31'*omega_p)*(obj.c32'*omega_p) - (omega_p'*omega_p)*(obj.c31'*obj.c32))...
+                        + obj.L1*(omega_31'*omega_31)*(obj.c31'*obj.b3) + obj.L2*(omega_32'*omega_32);
+            delta_1 = [delta_11; delta_21; delta_31];
+
+            ddthetas = (J_theta_a\J_X_a) * ddX_p + (J_theta_a\delta_1);
         end
 
         function [f, zp_space, maxId] = plotToolWorkSpace(obj, zp_range, alpha_range, beta_range, N_zp)
