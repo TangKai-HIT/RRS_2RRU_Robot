@@ -8,8 +8,6 @@ end
 
 if ~exist("theta","var")
     theta = omegaNorm;
-else
-    theta = theta * omegaNorm;
 end
 
 omegaSkew = skewMatrix(omega);
