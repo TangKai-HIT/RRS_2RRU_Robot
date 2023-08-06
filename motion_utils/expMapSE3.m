@@ -9,13 +9,11 @@ end
 omegaNorm = norm(omega);
 if omegaNorm>0
         omega = omega/omegaNorm;
+        v = v/omegaNorm;
 end
 
 if ~exist("theta","var")
     theta = omegaNorm;
-else
-    v = v * theta;
-    theta = theta * omegaNorm;
 end
 
 if omegaNorm>0
