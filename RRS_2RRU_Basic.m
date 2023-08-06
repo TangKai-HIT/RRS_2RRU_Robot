@@ -90,6 +90,12 @@ classdef RRS_2RRU_Basic < handle
 
             Tf_P = Tf_BTC * getInvSE3(Tf_p_btc);
             obj.P = Tf_P(1:3, 4);
+            
+            %update 2R-1T
+            obj.z_p = obj.P(3);
+            r13 = obj.R_P(1,3); r33 = obj.R_P(3,3); r23 = obj.R_P(2,3);
+            obj.alpha = atan2(-r23, sqrt(r13^2 + r33^2));
+            obj.beta = atan2(r13, r33); %cos(alpha) ~= 0
 
             C1_p = [obj.r; 0; 0];
             C2_p = [-obj.r; 0; 0];
