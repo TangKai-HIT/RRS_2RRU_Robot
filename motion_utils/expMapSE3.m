@@ -23,6 +23,6 @@ if omegaNorm>0
     SE3 = [SO3,   (eye(3)*theta + (1-cos(theta))*omegaSkew + (theta - sin(theta))*omegaSkew*omegaSkew) * v;
                 zeros(1,3),                                 1];
 else
-    SE3 = [eye(3),           v;
+    SE3 = [eye(3),           v*theta;
                 zeros(1,3),     1];
 end
