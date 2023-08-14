@@ -23,6 +23,9 @@ classdef RRS_2RRU_Hybrid < handle
         Tf_BTC_init;
         Tf_P_local_init;
         Tf_P_init;
+
+        Tf_P; %P in base coordinate
+        Tf_BTC; %P in base coordinate
     end
 
     methods
@@ -39,17 +42,24 @@ classdef RRS_2RRU_Hybrid < handle
                 
                 [obj.Tf_BTC_local_init, obj.Tf_P_local_init] = obj.RRS_2RRU.setEndEffectorSE3(z_p_init, 0, 0);
                 obj.RRS_2RRU.invKineUpdate(obj.Tf_BTC_local_init);
+                
+                Tf_0_pkm = expMapSE3(obj.twist_1, obj.theta1) * expMapSE3(obj.twist_2, d1_init) * trvec2tform([0, obj.pkm_y_offset, obj.pkm_z_offset]);
+                obj.Tf_P_init = Tf_0_pkm * obj.Tf_P_local_init;
+                obj.Tf_P = obj.Tf_P_init;
+                obj.Tf_BTC_init = Tf_0_pkm * obj.Tf_BTC_local_init;
+                obj.Tf_BTC = obj.Tf_BTC_init;
             end
         end
 
         function [theta1, d1, thetas_pkm] = invKine(obj,Tf_BTC)
             %INVKINE inverse kinematic of hybrid robot
             %   Detailed explanation goes here
-
+            
+            obj.Tf_BTC = Tf_BTC;
             %P pose & position in base coordinate
             Tf_BTC_P = trvec2tform([0 0 -obj.RRS_2RRU.toolHight]);
-            Tf_P = Tf_BTC * Tf_BTC_P;
-            P = Tf_P(1:3, 4);
+            obj.Tf_P = Tf_BTC * Tf_BTC_P;
+            P = obj.Tf_P(1:3, 4);
             
             %solve subproblem for theta1 and z_p
             z_p = sqrt(P(2)^2 + P(3)^2 - obj.pkm_y_offset^2) - obj.pkm_z_offset;
@@ -72,6 +82,55 @@ classdef RRS_2RRU_Hybrid < handle
             %solve invkine of PKM RRS_2RRU
             [Tf_BTC_local, ~] = obj.RRS_2RRU.setEndEffectorSE3(z_p, alpha, beta); 
             thetas_pkm = obj.RRS_2RRU.invKineUpdate(Tf_BTC_local);
+        end
+
+        function [J_a_tool, J_a_P] = getActuationBodyJacob(obj)
+            %GETACTUATIONBODYJACOB get actuation body jacobian from tool tip/P-Point body twist to generalized coordinates, 
+            %                   J_a_tool*dX_b_tool = J_a_P*dX_b_P = [dtheta1; d_d1; dtheta11; dtheta21; dtheta31]
+            
+            %some basic utils
+            I_tilt = [0, -1; 1, 0];
+            Tf_0_P0 = expMapSE3(obj.twist_1, obj.theta1) * expMapSE3(obj.twist_2, obj.d1);
+            Tf_0_pkm = Tf_0_P0 * trvec2tform([0, obj.pkm_y_offset, obj.pkm_z_offset]);
+
+            Tf_P_0 = getInvSE3(obj.Tf_P);
+            Tf_P_P0 = Tf_P_0 * Tf_0_P0;
+
+            p_yz = obj.Tf_P(2:3, 4);
+            r_sq = p_yz' * p_yz;
+
+            Tf_pkm_P =  getInvSE3(Tf_0_pkm) * obj.Tf_P;
+            rotm_pkm_P = Tf_pkm_P(1:3, 1:3);
+
+            rotm_P = obj.Tf_P(1:3, 1:3);
+            Tf_C3_P = trvec2tform([0,-obj.RRS_2RRU.r, 0]);
+
+            twist_vx = [0, 0, 0, 1, 0, 0];
+            twist_vy = [0, 0, 0, 0, 1, 0];
+            twist_vz = [0, 0, 0, 0, 0, 1];
+
+            %local jacobian
+            J_a_pkm = obj.RRS_2RRU.getActuationJacob();
+            
+            %P-Point body twist actuation jacobian(in body frame)
+            J_a_P_1 = 1/r_sq * (-p_yz' * I_tilt + (p_yz' * I_tilt * p_yz)/r_sq * p_yz') * [twist_vy; twist_vz] * blkdiag(rotm_P, rotm_P);
+            
+            J_a_P_2 = twist_vx * blkdiag(rotm_P, rotm_P) * adjointMatrix(Tf_C3_P);
+            
+            temp = adjointMatrix(Tf_P_P0) * (adjointMatrix(expMapSE3(obj.twist_2, -obj.d1)) * obj.twist_1 * J_a_P_1 + obj.twist_2 * J_a_P_2);
+            J_a_P_3 = J_a_pkm *  blkdiag(rotm_pkm_P, rotm_pkm_P) * (eye(6) - temp);
+
+            J_a_P = [J_a_P_1; J_a_P_2; J_a_P_3];
+
+            %tool tip body twist actuation jacobian(in body frame)
+            Tf_P_tool = Tf_P_0 * obj.Tf_BTC;
+            J_a_tool = J_a_P * adjointMatrix(Tf_P_tool);
+        end
+        
+        function Tf_tool = forwardKine(obj, theta1, d1, z_p, alpha, beta)
+            Tf_pkm = expMapSE3(obj.twist_1, theta1) * expMapSE3(obj.twist_2, d1) * trvec2tform([0, obj.pkm_y_offset, obj.pkm_z_offset]);
+            [Tf_pkm_tool, ~] = obj.RRS_2RRU.setEndEffectorSE3(z_p, alpha, beta);
+            Tf_tool = Tf_pkm*Tf_pkm_tool;
         end
     end
 end
