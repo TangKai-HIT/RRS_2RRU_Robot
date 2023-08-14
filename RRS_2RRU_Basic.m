@@ -240,6 +240,10 @@ classdef RRS_2RRU_Basic < handle
 
         function [J_rt, J_rp] = getOutputJacob(obj, alpha, beta)
             %GETOUTPUTJACOB J_rp*[dz_p; dalpha, dbeta] = dX_p
+            %   Inputs:
+            %       J_rt:OutputJacob to tool tip body twist in base frame
+            %       J_rp:OutputJacob to P point body twist in base frame
+            
             if ~exist("alpha","var") && ~exist("beta","var")
                 alpha = obj.alpha;
                 beta = obj.beta;
