@@ -10,6 +10,10 @@ classdef RRS_2RRU_Basic < handle
         toolHight; %cutter BTC hight (z) in P frame
         thetas;
         gravity = [0;0;-9.8]; %gravity
+
+        %singularity check using condition number
+        maxKappa_fkine = 10;
+        maxKappa_invkine = 40;
     end
 
     properties(SetAccess=private, GetAccess=public)
@@ -189,6 +193,18 @@ classdef RRS_2RRU_Basic < handle
             J_X_a = [J_X_1a; J_X_2a; J_X_3a];
         end
         
+        function [Kappa_fkine, Kappa_invkine] = manipulationCondNum(obj)
+            %MANIPULATIONCONDNUM compute manipulation condition number
+            [J_theta_a, J_X_a] = obj.getSplitedActuationJacob();
+            [~, J_rp] = obj.getOutputJacob(obj.alpha, obj.beta);
+            J_inv = J_X_a * J_rp;
+
+            %forward manipulation Condition Number
+            Kappa_fkine = norm(J_theta_a, "fro") * norm(inv(J_theta_a), "fro");
+            %inverse manipulation Condition Number
+            Kappa_invkine = norm(J_inv, "fro") * norm(inv(J_inv), "fro");
+        end
+
         function [forwardSingular, inverseSingular] = checkSingularity(obj, tol)
             %CHECKSINGULARITY check inverse and forward singularity
             forwardSingular = false;
@@ -203,6 +219,24 @@ classdef RRS_2RRU_Basic < handle
             %check inverse singularity
             inverse = [norm(cross(obj.c12,obj.c11)), norm(cross(obj.c22,obj.c21)), norm(cross(obj.c32,obj.c31))];
             if min(inverse) < tol
+                inverseSingular = true;
+            end
+        end
+        
+        function [forwardSingular, inverseSingular] = checkSingularityCondNum(obj)
+            %CHECKSINGULARITYCONDNUM check inverse and forward singularity using conditional number of Frobenius norm
+            forwardSingular = false;
+            inverseSingular = false;
+            
+            [Kappa_fkine, Kappa_invkine] = obj.manipulationCondNum();
+
+            %check forward singularity
+            if Kappa_fkine < obj.maxKappa_fkine
+                forwardSingular = true;
+            end
+            
+            %check inverse singularity
+            if Kappa_invkine < obj.maxKappa_invkine
                 inverseSingular = true;
             end
         end
