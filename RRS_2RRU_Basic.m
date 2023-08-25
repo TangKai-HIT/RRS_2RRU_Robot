@@ -231,12 +231,12 @@ classdef RRS_2RRU_Basic < handle
             [Kappa_fkine, Kappa_invkine] = obj.manipulationCondNum();
 
             %check forward singularity
-            if Kappa_fkine < obj.maxKappa_fkine
+            if Kappa_fkine > obj.maxKappa_fkine
                 forwardSingular = true;
             end
             
             %check inverse singularity
-            if Kappa_invkine < obj.maxKappa_invkine
+            if Kappa_invkine > obj.maxKappa_invkine
                 inverseSingular = true;
             end
         end
