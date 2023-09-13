@@ -113,7 +113,7 @@ classdef RRS_2RRU_Hybrid < handle
             J_a_pkm = obj.RRS_2RRU.getActuationJacob();
             
             %P-Point body twist actuation jacobian(in body frame)
-            J_a_P_1 = 1/r_sq * (-p_yz' * I_tilt + (p_yz' * I_tilt * p_yz)/r_sq * p_yz') * [twist_vy; twist_vz] * blkdiag(rotm_P, rotm_P);
+            J_a_P_1 = - 1/r_sq * p_yz' * I_tilt * [twist_vy; twist_vz] * blkdiag(rotm_P, rotm_P);
             
             J_a_P_2 = twist_vx * blkdiag(rotm_P, rotm_P) * adjointMatrix(Tf_C3_P);
             
