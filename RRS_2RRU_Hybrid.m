@@ -51,9 +51,10 @@ classdef RRS_2RRU_Hybrid < handle
             end
         end
 
-        function [theta1, d1, thetas_pkm] = invKine(obj,Tf_BTC)
+        function config = invKine(obj,Tf_BTC)
             %INVKINE inverse kinematic of hybrid robot
-            %   Detailed explanation goes here
+            %   output: 
+            %       config: 1 x 5, [theta1, d1, thetas_pkm]
             
             obj.Tf_BTC = Tf_BTC;
             %P pose & position in base coordinate
@@ -82,6 +83,11 @@ classdef RRS_2RRU_Hybrid < handle
             %solve invkine of PKM RRS_2RRU
             [Tf_BTC_local, ~] = obj.RRS_2RRU.setEndEffectorSE3(z_p, alpha, beta); 
             thetas_pkm = obj.RRS_2RRU.invKineUpdate(Tf_BTC_local);
+
+            config = [];
+            if ~isempty(thetas_pkm)
+                config = [theta1, d1, thetas_pkm];
+            end
         end
 
         function [J_a_tool, J_a_P] = getActuationBodyJacob(obj)

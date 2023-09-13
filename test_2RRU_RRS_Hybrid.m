@@ -34,7 +34,10 @@ J_a_tool_b = zeros(5, 6, N);
 J_a_P_b = zeros(5, 6, N);
 
 for i=1:N
-    [q_inv(1,i), q_inv(2,i), theta_pkm(:, i)] = Hyd_RRS_2RRU.invKine(Tf_tool_path(:, :, i));
+    config = Hyd_RRS_2RRU.invKine(Tf_tool_path(:, :, i));
+    q_inv(1,i) = config(1); 
+    q_inv(2,i) = config(2); 
+    theta_pkm(:, i) = config(3:5); 
     q_inv(3,i) = Hyd_RRS_2RRU.RRS_2RRU.z_p;
     q_inv(4,i) = Hyd_RRS_2RRU.RRS_2RRU.alpha;
     q_inv(5,i) = Hyd_RRS_2RRU.RRS_2RRU.beta;
@@ -54,3 +57,40 @@ end
 %joints velocity by diff
 d_theta_pkm = diff(theta_pkm, 1, 2)/dt;
 d_q_diff = [diff(q_inv(1:2, :), 1, 2)/dt; d_theta_pkm];
+
+%% Check Singularity (plot surface)
+N = 100;
+alpha_space = linspace(-deg2rad(25), deg2rad(25), N);
+beta_space = linspace(-deg2rad(25), deg2rad(25), N);
+z_p = 330*1e-3;
+
+[alpha_grid, beta_grid] = meshgrid(rad2deg(alpha_space), rad2deg(beta_space));
+
+fkine_condNum_grid = zeros(N, N);
+invkine_condNum_grid = zeros(N, N);
+for i = 1:N
+    for j = 1:N
+        cur_alpha = alpha_space(i);
+        cur_beta = beta_space(j);
+        
+        [Tf_BTC, ~] = Hyd_RRS_2RRU.RRS_2RRU.setEndEffectorSE3(z_p, cur_alpha, cur_beta);
+        Hyd_RRS_2RRU.RRS_2RRU.invKineUpdate(Tf_BTC);
+        [fkine_condNum_grid(i, j), invkine_condNum_grid(i, j)] = Hyd_RRS_2RRU.RRS_2RRU.manipulationCondNum();
+    end
+end
+
+fprintf("min fkine manipulability condition number:\n %.2f\n", min(fkine_condNum_grid, [], 'all'));
+fprintf("min invkine manipulability condition number:\n %.2f\n", min(invkine_condNum_grid, [], 'all'));
+
+f = figure("Position",[200, 100, 1500, 800]);
+subplot(1,2,1);
+surf(alpha_grid, beta_grid, fkine_condNum_grid);
+title("fkine manipulability condition number");
+xlabel("alpha/°"); ylabel("beta/°");
+
+subplot(1,2,2);
+surf(alpha_grid, beta_grid, invkine_condNum_grid);
+title("invkine manipulability condition number");
+xlabel("alpha/°"); ylabel("beta/°");
+
+sgtitle(sprintf("At operation height z_p=%.2f m", z_p));
