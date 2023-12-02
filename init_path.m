@@ -1,1 +1,2 @@
-addpath(genpath(pwd))
+addpath(genpath(pwd));
+rmpath(genpath("./.git/"));
