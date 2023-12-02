@@ -175,9 +175,9 @@ classdef RRS_2RRU_Basic < handle
         function J_pa = getPassiveJacob(obj)
             %GETPASSIVEJACOB J_pa*dX_p = [dtheta12; dtheta22; dtheta32]
 
-            J_pa_1 = [obj.r*cross(obj.c12, obj.b1)', obj.c11']./(obj.L2*dot(cross(obj.c11, obj.b1), obj.s12));
-            J_pa_2 = [obj.r*cross(obj.c22, obj.b2)', obj.c21']./(obj.L2*dot(cross(obj.c21, obj.b2), obj.s22));
-            J_pa_3 = [obj.r*cross(obj.c32, obj.b3)', obj.c31']./(obj.L2*dot(cross(obj.c31, obj.b3), obj.s32));
+            J_pa_1 = [obj.r*cross(obj.c12, obj.b1)', obj.b1']./(obj.L2*dot(cross(obj.c11, obj.b1), obj.s12));
+            J_pa_2 = [obj.r*cross(obj.c22, obj.b2)', obj.b2']./(obj.L2*dot(cross(obj.c21, obj.b2), obj.s22));
+            J_pa_3 = [obj.r*cross(obj.c32, obj.b3)', obj.b3']./(obj.L2*dot(cross(obj.c31, obj.b3), obj.s32));
             J_pa = [J_pa_1; J_pa_2; J_pa_3];
         end
 
@@ -193,6 +193,31 @@ classdef RRS_2RRU_Basic < handle
             J_X_a = [J_X_1a; J_X_2a; J_X_3a];
         end
         
+        function dJ_a = getActuationJacobDiff(obj, J_a, J_pa, dX_p)
+            %GETACTUATIONJACOBDIFF return dJ_a, ddtheta = J_a*ddX_p + dJ_a*dX_p
+            %   Inputs:
+            %       J_a, J_pa, dX_p: update inverse kinematic, get actuation jacob-J_a, passive jacob-J_pa
+            
+            E = [eye(3), zeros(3,3)];
+            dtheta1 = J_a*dX_p;
+            dtheta2 = J_pa*dX_p;
+            omega_p = dX_p(1:3);
+            
+            nom = obj.L1*dot(cross(obj.b1,obj.c11), obj.s11);
+            dJ_a1 = (obj.r*((obj.c11'*omega_p)*obj.c12' - (obj.c11'*obj.c12)*omega_p')*E +...
+                        obj.L1*obj.c11'*obj.b1*dtheta1(1)*J_a(1,:) + obj.L2*dtheta2(1)*J_pa(1,:))./nom;
+
+            nom = obj.L1*dot(cross(obj.b2,obj.c21), obj.s21);
+            dJ_a2 = (obj.r*((obj.c21'*omega_p)*obj.c22' - (obj.c21'*obj.c22)*omega_p')*E +...
+                        obj.L1*obj.c21'*obj.b2*dtheta1(2)*J_a(2,:) + obj.L2*dtheta2(2)*J_pa(2,:))./nom;
+
+            nom = obj.L1*dot(cross(obj.b3,obj.c31), obj.s31);
+            dJ_a3 = (obj.r*((obj.c31'*omega_p)*obj.c32' - (obj.c31'*obj.c32)*omega_p')*E +...
+                        obj.L1*obj.c31'*obj.b3*dtheta1(3)*J_a(3,:) + obj.L2*dtheta2(3)*J_pa(3,:))./nom;                      
+
+            dJ_a = [dJ_a1; dJ_a2; dJ_a3];
+        end
+
         function [Kappa_fkine, Kappa_invkine] = manipulationCondNum(obj)
             %MANIPULATIONCONDNUM compute manipulation condition number
             [J_theta_a, J_X_a] = obj.getSplitedActuationJacob();
@@ -274,11 +299,11 @@ classdef RRS_2RRU_Basic < handle
 
         function [J_rt, J_rp] = getOutputJacob(obj, alpha, beta)
             %GETOUTPUTJACOB J_rp*[dz_p; dalpha, dbeta] = dX_p
-            %   Inputs:
+            %   Outputs:
             %       J_rt:OutputJacob to tool tip body twist in base frame
             %       J_rp:OutputJacob to P point body twist in base frame
             
-            if ~exist("alpha","var") && ~exist("beta","var")
+            if nargin<2
                 alpha = obj.alpha;
                 beta = obj.beta;
             end
@@ -299,6 +324,24 @@ classdef RRS_2RRU_Basic < handle
                     -skewMatrix(r_tool),     eye(3)];
             
             J_rt = trans * J_rp;
+        end
+
+        function dJ_rp = getOutputJacobDiff(obj, dalpha, dbeta)
+            %GETOUTPUTJACOBDIFF  ddX_p = J_rp*[ddz_p; ddalpha; ddbeta] + dJ_rp*[dz_p; dalpha; dbeta]
+            %   Inputs:
+            %       dalpha, dbeta 
+            %   Outputs:
+            %       dJ_rp:OutputJacob to P point body twist in base frame 
+
+            dJ_rp_T = [0,  obj.r*(sin(obj.alpha)*sin(obj.beta)*dalpha - cos(obj.alpha)*cos(obj.beta)*dbeta),   obj.r*(-cos(obj.alpha)*cos(obj.beta)*dalpha + sin(obj.alpha)*sin(obj.beta)*dbeta);
+                                0,                             0,                           0;
+                                0,                             0,                          0];
+            
+            dJ_rp_R = [0,    -sin(obj.beta)*dbeta,  0;
+                              0,      0,        0;
+                              0,    -cos(obj.beta)*dbeta, 0];
+
+            dJ_rp = [dJ_rp_R; dJ_rp_T];
         end
 
         function torque_actuate = getStaticForce_tool(obj, torque_body, force_body)
