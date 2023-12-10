@@ -15,10 +15,10 @@ RRS_2RRU = RRS_2RRU_Basic(R, r, L1, L2, toolHight, z_p_min);
 Hyd_RRS_2RRU = RRS_2RRU_Hybrid(RRS_2RRU, z_p_min, d1_init, pkm_y_offset, pkm_z_offset);
 
 %% Test trajectory
-wayPoints = [-pi/6, d1_init, 220*1e-3, 0, 0;
+wayPoints = [-pi/6, d1_init, 220*1e-3, -pi/7, 0;
             pi/6, d1_init + 0.3, 250*1e-3, pi/8, -pi/8]';
 timePoints = [0, 3];
-N = 500;
+N = 1000;
 dt = (timePoints(end) - timePoints(1)) / (N-1);
 [q,qd,qdd,~] = cubicpolytraj(wayPoints,timePoints,linspace(timePoints(1), timePoints(end), N));
 
@@ -32,31 +32,52 @@ q_inv = zeros(size(q));
 theta_pkm = zeros(3, N);
 J_a_tool_b = zeros(5, 6, N);
 J_a_P_b = zeros(5, 6, N);
+config = zeros(5, N);
 
 for i=1:N
-    config = Hyd_RRS_2RRU.invKine(Tf_tool_path(:, :, i));
-    q_inv(1,i) = config(1); 
-    q_inv(2,i) = config(2); 
-    theta_pkm(:, i) = config(3:5); 
+    config(:, i) = Hyd_RRS_2RRU.invKine(Tf_tool_path(:, :, i));
+    q_inv(1,i) = config(1, i); 
+    q_inv(2,i) = config(2, i); 
+    theta_pkm(:, i) = config(3:5, i); 
     q_inv(3,i) = Hyd_RRS_2RRU.RRS_2RRU.z_p;
     q_inv(4,i) = Hyd_RRS_2RRU.RRS_2RRU.alpha;
     q_inv(5,i) = Hyd_RRS_2RRU.RRS_2RRU.beta;
     [J_a_tool_b(:, :, i), J_a_P_b(:, :, i)] = Hyd_RRS_2RRU.getActuationBodyJacob();
+
 end
 
-%% Check Jacobian
+%% Check Jacobian & its derivative
 %joints velocity by Jacobian
 dX_tool_b = zeros(6,N-1);
 dq_Jacob = zeros(5,N-1);
 
+dJ_a_tool_b = zeros(5, 6, N-2);
+dJ_a_P_b = zeros(5, 6, N-2);
+ddq_Jacob = zeros(5, N-2);
+
 for i=1:N-1
     dX_tool_b(:, i) = logMapSE3(Tf_tool_path(:, :, i) \ Tf_tool_path(:, :, i+1)) / dt;
     dq_Jacob(:, i) = J_a_tool_b(:, :, i) * dX_tool_b(:, i);
+
+    if i>1
+        ddX_tool_b = (jacobRSE3(dX_tool_b(:, i-1)*dt)\dX_tool_b(:, i) - dX_tool_b(:, i-1)) / dt;
+        % ddX_tool_b = (dX_tool_b(:, i) - dX_tool_b(:, i-1)) / dt;
+        Hyd_RRS_2RRU.invKine(Tf_tool_path(:, :, i-1)); %update IK
+        Hyd_RRS_2RRU.getActuationBodyJacob(); %update Jacobian 
+        [dJ_a_tool_b(:, :, i-1), dJ_a_P_b(:, :, i-1)] = Hyd_RRS_2RRU.getActuationBodyJacobDiff(dX_tool_b(:, i-1));
+
+        ddq_Jacob(:, i-1) = J_a_tool_b(:, :, i-1) * ddX_tool_b + dJ_a_tool_b(:, :, i-1) * dX_tool_b(:, i-1);
+    end
 end
 
 %joints velocity by diff
 d_theta_pkm = diff(theta_pkm, 1, 2)/dt;
 d_q_diff = [diff(q_inv(1:2, :), 1, 2)/dt; d_theta_pkm];
+disp("velocity error check:"); disp(max(abs(d_q_diff - dq_Jacob), [], 2));
+
+%joints accel by diff
+dd_q_diff = diff(d_q_diff, 1, 2)/dt;
+disp("accel error check:"); disp(max(abs(dd_q_diff - ddq_Jacob), [], 2));
 
 %% Check Singularity (plot surface)
 N = 100;
