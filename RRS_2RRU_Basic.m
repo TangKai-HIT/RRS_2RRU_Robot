@@ -13,6 +13,9 @@ classdef RRS_2RRU_Basic < handle
         %singularity check using condition number
         maxKappa_fkine = 10;
         maxKappa_invkine = 40;
+
+        %max ball joint angle
+        maxBallJointAngle = pi/6; %30 degree
     end
 
     properties(SetAccess=private, GetAccess=public)
@@ -60,6 +63,10 @@ classdef RRS_2RRU_Basic < handle
         c21; c22;
         c31; c32;
         b1; b2; b3;
+        
+        %ball joint installation base normal vector in P frame
+        s_n_P;
+        s_install_angle = pi/4;
 
         %jacobians
         J_a; %actuation jacobian
@@ -83,6 +90,7 @@ classdef RRS_2RRU_Basic < handle
                 obj.z_p_min = z_p_min;
                 obj.z_p_operation = (obj.z_p_max + obj.z_p_min) / 2;
                 obj.delta_z_p = obj.z_p_max - obj.z_p_min;
+                obj.s_n_P = rotX(-(pi/2-obj.s_install_angle)) * [0; -1; 0];
             end
         end
 
@@ -152,9 +160,9 @@ classdef RRS_2RRU_Basic < handle
             obj.thetas = thetas;
 
             %update Bi
-            obj.B1 = obj.A1 + eul2rotm([0, -thetas(1), 0], "ZYX") * [obj.L1; 0; 0];
-            obj.B2 = obj.A2 + eul2rotm([0, -thetas(2), 0], "ZYX") * [obj.L1; 0; 0];
-            obj.B3 = obj.A3 + eul2rotm([0, 0, thetas(3)], "ZYX") * [0; obj.L1; 0];
+            obj.B1 = obj.A1 + rotY(-thetas(1)) * [obj.L1; 0; 0];
+            obj.B2 = obj.A2 + rotY(-thetas(2)) * [obj.L1; 0; 0];
+            obj.B3 = obj.A3 + rotX(thetas(3)) * [0; obj.L1; 0];
 
             %update dirctional vectors
             obj.b1 = (obj.B1 - obj.A1)/obj.L1;
@@ -515,6 +523,14 @@ classdef RRS_2RRU_Basic < handle
             [~, J_rp] = obj.getOutputJacob();
 
             G_actuate = - (J_a*J_rp)' \ (J_rp' *  wrench_P);
+        end
+        
+        function [isValid, curAngle] = checkBallJointAngle(obj)
+            %CHECKBALLJOINTANGLE check ball joint installation angle if is in the valid range (update IK first)
+            s_n = obj.R_P * obj.s_n_P;
+            curAngle = acos(dot(s_n, obj.c31));
+
+            isValid = curAngle <= obj.maxBallJointAngle;
         end
 
     end
