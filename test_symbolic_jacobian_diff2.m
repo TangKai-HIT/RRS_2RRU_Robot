@@ -99,7 +99,7 @@ for i=1:N
     J_a_Pe(:, :, i) = Hyd_JaPe_2([alpha_traj(i), beta_traj(i)], endPos_traj(:, i));
     dconfigs_test(:, i) = J_a_2R(:, :, i)*[dalpha_traj(i); dbeta_traj(i)] + J_a_Pe(:, :, i)*endVel_traj(:, i);
     
-    [dJ_a_d2R_Hyd(:, :, i), dJ_a_dPe_Hyd(:, :, i)] = Hyd_RRS_2RRU.getEndPosConJacobian2RDiff(dalpha_traj(i), dbeta_traj(i), endAcc_traj(:, i));
+    [dJ_a_d2R_Hyd(:, :, i), dJ_a_dPe_Hyd(:, :, i)] = Hyd_RRS_2RRU.getEndPosConJacobian2RDiff(dalpha_traj(i), dbeta_traj(i), endVel_traj(:, i));
     dJ_a2R_d2R = Hyd_dJa2R_d2R_2([alpha_traj(i), beta_traj(i)], endPos_traj(:, i));
     dJ_aPe_d2R = Hyd_dJaPe_d2R_2([alpha_traj(i), beta_traj(i)], endPos_traj(:, i));
     dJ_a2R_dPe = Hyd_dJa2R_dPe_2([alpha_traj(i), beta_traj(i)], endPos_traj(:, i));
