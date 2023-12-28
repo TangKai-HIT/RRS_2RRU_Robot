@@ -19,7 +19,7 @@ Hyd_RRS_2RRU = RRS_2RRU_Hybrid(RRS_2RRU, z_p_min, d1_init, pkm_y_offset, pkm_z_o
 wayPoints = [-pi/6, d1_init, 250*1e-3, 0, 0;
             pi/6, d1_init + 0.3, 350*1e-3, pi/8, -pi/7]';
 timePoints = [0, 3];
-N = 1000;
+N = 2000;
 dt = (timePoints(end) - timePoints(1)) / (N-1);
 time_sequence = linspace(timePoints(1), timePoints(end), N);
 [q,qd,qdd,~] = cubicpolytraj(wayPoints,timePoints,time_sequence);
@@ -71,6 +71,7 @@ config_stateTrajDiff_test = zeros(5*3, N-1);
 % dJ_a_2R = zeros(5, 2, N-1);
 
 J_Xq_X2R = zeros(15, 6);
+tic;
 for i=1:N-1
     %Note: numerical accuracy should be lower than 1e-7 when using functions trans from symbolic ones, otherwise NAN would occur
     if abs(alpha_traj(i))<1e-7; alpha_traj(i)=sign(alpha_traj(i))*1e-7; end
@@ -99,6 +100,8 @@ for i=1:N-1
 
     config_stateTrajDiff_test(:, i) = J_Xq_X2R * angle2R_stateTrajDiff(:, i);
 end
+runtime1 = toc;
+fprintf("symbolic diff function run time: %.3f\n", runtime1);
 
 % show test results
 disp("error check:"); disp(max(abs(config_stateTrajDiff_test - config_stateTrajDiff_expect), [], 2));
